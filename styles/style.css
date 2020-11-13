@@ -16,3 +16,33 @@ body {
     background-color: white;
     height: 85vh;
 }
+
+#info {
+    background-color: blue;
+    height: 30px;
+    width: 30px;
+}
+
+#flights {
+    background-color: orange;
+    height: 30px;
+    width: 30px;
+}
+
+#map {
+    background-color: red;
+    height: 30px;
+    width: 30px;
+}
+
+#stocks {
+    background-color: green;
+    height: 30px;
+    width: 30px;
+}
+
+#debt {
+    background-color: pink;
+    height: 30px;
+    width: 30px;
+}
