@@ -15,6 +15,8 @@ body {
 .chart-containers {
     display: flex;
     flex-direction: rows;
+    margin: 2px;
+    align-items: center;
 }
 
 .contents {
@@ -29,30 +31,35 @@ body {
 
 #info {
     background-color: blue;
-    height: 200px;
+    height: 400px;
     width: 200px;
+    margin: 2px;
 }
 
 #flights {
     background-color: orange;
     height: 200px;
     width: 200px;
+    margin: 2px;
 }
 
 #map {
     background-color: red;
     height: 200px;
     width: 200px;
+    margin: 2px;
 }
 
 #stocks {
     background-color: green;
     height: 200px;
     width: 200px;
+    margin: 2px;
 }
 
 #debt {
     background-color: pink;
     height: 200px;
     width: 200px;
+    margin: 2px;
 }
