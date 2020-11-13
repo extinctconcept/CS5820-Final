@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+.header {
+    display: flex;
+    justify-content: start;
+    font-size: 24pt;
+    color: white;
+    background: linear-gradient(90deg, rgba(30, 30, 30) 0%, rgba(24, 24, 24) 50%);
+    padding: 30px;
+}
+
+.chart-containers {
+    display: flex;
+    flex-direction: rows;
+}
+
+.contents {
+    background-color: white;
+    height: 85vh;
+    overflow: auto;
+}
+
+.charts{
+    display: flex;
+}
+
+#info {
+    background-color: blue;
+    height: 200px;
+    width: 200px;
+}
+
+#flights {
+    background-color: orange;
+    height: 200px;
+    width: 200px;
+}
+
+#map {
+    background-color: red;
+    height: 200px;
+    width: 200px;
+}
+
+#stocks {
+    background-color: green;
+    height: 200px;
+    width: 200px;
+}
+
+#debt {
+    background-color: pink;
+    height: 200px;
+    width: 200px;
+}
