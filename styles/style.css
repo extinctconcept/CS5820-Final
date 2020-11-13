@@ -12,37 +12,47 @@ body {
     padding: 30px;
 }
 
+.chart-containers {
+    display: flex;
+    flex-direction: rows;
+}
+
 .contents {
     background-color: white;
     height: 85vh;
+    overflow: auto;
+}
+
+.charts{
+    display: flex;
 }
 
 #info {
     background-color: blue;
-    height: 30px;
-    width: 30px;
+    height: 200px;
+    width: 200px;
 }
 
 #flights {
     background-color: orange;
-    height: 30px;
-    width: 30px;
+    height: 200px;
+    width: 200px;
 }
 
 #map {
     background-color: red;
-    height: 30px;
-    width: 30px;
+    height: 200px;
+    width: 200px;
 }
 
 #stocks {
     background-color: green;
-    height: 30px;
-    width: 30px;
+    height: 200px;
+    width: 200px;
 }
 
 #debt {
     background-color: pink;
-    height: 30px;
-    width: 30px;
+    height: 200px;
+    width: 200px;
 }
