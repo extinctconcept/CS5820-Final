@@ -13,48 +13,52 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title></title>
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="icon" type="image/png" href="assets/chart.png" />
-  </head>
-  <body>
-    <header class="header">
-        DATA CASE: Final Project
-    </header>
-    <section class="contents">
-      <div class="row">
-        <svg id="timeline"></svg>
-      </div>
-      <div class="row">
-        <div class="body">
-            <div class="chart-containers">
-                <div id="info"></div>
-                <div class="charts">
-                <div>
-                    <div id="flights"></div>
-                    <div id="map"></div>
-                </div>
-                <div>
-                    <div id="stocks"></div>
-                    <div id="debt"></div>
-                </div>
-                </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="icon" type="image/png" href="assets/chart.png" />
+</head>
+
+<body>
+  <header class="header">
+    DATA CASE: Final Project
+  </header>
+  <section class="contents">
+    <div class="row">
+      <svg id="timeline"></svg>
+    </div>
+    <div class="row">
+      <div class="body">
+        <div class="chart-containers">
+          <div id="info"></div>
+          <div class="charts">
+            <div>
+              <div id="flights"></div>
+              <div id="map"></div>
+            </div>
+            <div>
+              <div id="stocks"></div>
+              <div id="debt"></div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    </div>
 
-    </section>
-    <script type="application/javascript" src="js/d3.js"></script>
-    <!-- <script type="application/javascript" src="js/tooltip.js"></script>
-    <script type="application/javascript" src="js/ClassSelector.js"></script>
-    <script type="application/javascript" src="js/cartogram.js"></script>
-    <script type="application/javascript" src="js/Line.js"></script>
-    <script type="application/javascript" src="js/Bar.js"></script> -->
-    <script type="application/javascript" src="js/info.js"></script>
-    <script type="application/javascript" src="js/timeline.js"></script>
-    <script type="application/javascript" src="js/main.js"></script>
-  </body>
+  </section>
+  <script type="application/javascript" src="//d3js.org/topojson.v1.min.js"></script>
+  <script type="application/javascript" src="js/d3.js"></script>
+  <!-- <script type="application/javascript" src="js/tooltip.js"></script>
+      <script type="application/javascript" src="js/cartogram.js"></script> -->
+  <script type="application/javascript" src="js/line.js"></script>
+  <script type="application/javascript" src="js/classSelector.js"></script>
+  <script type="application/javascript" src="js/map.js"></script>
+  <!-- <script type="application/javascript" src="js/info.js"></script> -->
+  <script type="application/javascript" src="js/timeline.js"></script>
+  <script type="application/javascript" src="js/main.js"></script>
+</body>
+
 </html>

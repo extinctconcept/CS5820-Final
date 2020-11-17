@@ -16,7 +16,7 @@ body {
     display: flex;
     flex-direction: rows;
     margin: 2px;
-    align-items: center;
+    align-content: center;
 }
 
 .contents {
@@ -31,7 +31,7 @@ body {
 
 #info {
     background-color: blue;
-    height: 400px;
+    height: 450px;
     width: 200px;
     margin: 2px;
 }
@@ -44,9 +44,8 @@ body {
 }
 
 #map {
-    background-color: red;
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 25vw;
     margin: 2px;
 }
 
