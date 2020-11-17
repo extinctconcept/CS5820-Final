@@ -1,0 +1,12 @@
+dataset,data_table_name,field_name,display_name,description,data_type,is_required
+Debt to the Penny,Debt to the Penny,record_date,Record Date,The date that data was published.,DATE,1
+Debt to the Penny,Debt to the Penny,debt_held_public_amt,Debt Held by the Public,"All federal debt held by individuals, corporations, state or local governments, Federal Reserve Banks, foreign governments, and other entities outside the United States Government less Federal Financing Bank (FFB) securities. Debt held by the public is composed of Treasury Bills, Notes, Bonds, Treasury Inflation-Protected Securities (TIPS), Floating Rate Notes (FRNs), Domestic Series, Foreign Series, State and Local Government Series (SLGS), United States Savings Securities, and a portion of Government Account Series (GAS) securities.",CURRENCY,1
+Debt to the Penny,Debt to the Penny,intragov_hold_amt,Intragovernmental Holdings,"Government Account Series (GAS) securities held by Government trust funds, revolving funds, and special funds; and Federal Financing Bank (FFB) securities.",CURRENCY,1
+Debt to the Penny,Debt to the Penny,tot_pub_debt_out_amt,Total Public Debt Outstanding,Total of intragovernmental holdings and debt held by the public.,CURRENCY,1
+Debt to the Penny,Debt to the Penny,src_line_nbr,Source Line Number,Indicates the row of the corresponding table where a data point can be found.  This can assist in structuring the data in a similar format to the published report and in understanding potential hierarchies within the table.,NUMBER,1
+Debt to the Penny,Debt to the Penny,record_fiscal_year,Fiscal Year,The fiscal year associated with record_date.  The federal government's fiscal year runs from October 1 to September 30.,YEAR,1
+Debt to the Penny,Debt to the Penny,record_fiscal_quarter,Fiscal Quarter Number,"The fiscal quarter associated with record_date.  For the federal government these quarters are: Q1 - October to December, Q2 - January to March, Q3 - April to June, Q4 - July to September.",QUARTER,1
+Debt to the Penny,Debt to the Penny,record_calendar_year,Calendar Year,The calendar year associated with record_date.,YEAR,1
+Debt to the Penny,Debt to the Penny,record_calendar_quarter,Calendar Quarter Number,The calendar quarter associated with record_date.,QUARTER,1
+Debt to the Penny,Debt to the Penny,record_calendar_month,Calendar Month Number,The calendar month associated with record_date.,MONTH,1
+Debt to the Penny,Debt to the Penny,record_calendar_day,Calendar Day Number,The calendar day associated with record_date.,DAY,1
