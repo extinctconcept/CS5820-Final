@@ -1,0 +1,24 @@
+Name,Title,Type,Description,Is Searchable
+femaDeclarationString,FEMA Declaration String,string,"Agency standard method for uniquely identifying Stafford Act declarations - Concatenation of declaration type, disaster number and state code. Ex: DR-4393-NC",yes
+disasterNumber,Disaster Number,number,"Sequentially assigned number used to designate an event or incident declared as a disaster. For more information on the disaster process, please visit˜https://www.fema.gov/disasters/how-declared",yes
+state,State,string,"The name or phrase describing the U.S. state, district, or territory",yes
+declarationType,Declaration Type,string,"Two character code that defines if this is a major disaster, fire management, or emergency declaration. For more information on the disaster process, please visit˜https://www.fema.gov/disasters/how-declared",yes
+declarationDate,Declaration Date,date,Date the disaster was declared,yes
+fyDeclared,FY Declared,number,Fiscal year in which the disaster was declared,yes
+incidentType,Incident Type,string,"Type of incident such as fire or flood. The incident type will affect the types of assistance available. For more information on incident types, please visit˜https://www.fema.gov/disasters/how-declared",yes
+declarationTitle,Declaration Title,string,Title for the disaster,yes
+ihProgramDeclared,IH Program Declared,boolean,"Denotes whether the Individuals and Households program was declared for this disaster. For more information on the program, please visit˜https://www.fema.gov/assistance/individual/program",yes
+iaProgramDeclared,IA Program Declared,boolean,"Denotes whether the Individual Assistance program was declared for this disaster. For more information on the program, please visit˜https://www.fema.gov/assistance/individual/program",yes
+paProgramDeclared,PA Program Declared,boolean,"Denotes whether the Public Assistance program was declared for this disaster. For more information on the program, please visit˜https://www.fema.gov/assistance/public/program-overview",yes
+hmProgramDeclared,HM Program Declared,boolean,"Denotes whether the Hazard Mitigation program was declared for this disaster. For more information on the program, please visit˜https://www.fema.gov/grants/mitigation/hazard-mitigation",yes
+incidentBeginDate,Incident Begin Date,date,Date the incident itself began,yes
+incidentEndDate,Incident End Date,date,Date the incident itself ended,yes
+disasterCloseoutDate,Disaster Closeout Date,date,Date all financial transactions for all programs are completed,yes
+fipsStateCode,FIPS State Code,string,"FIPS two-digit numeric code used to identify the United States, the District of Columbia, US territories, outlying areas of the US and freely associated states",yes
+fipsCountyCode,FIPS County Code,string,"FIPS three-digit numeric code used to identify counties and county equivalents in the United States, the District of Columbia, US territories, outlying areas of the US and freely associated states",yes
+placeCode,Place Code,string,A unique code system FEMA uses internally to recognize locations that takes the numbers '99' + the 3-digit county FIPS code. There are some declared locations that don't have recognized FIPS county codes in which case we assigned a unique identifier,yes
+designatedArea,Designated Area,string,The name or phrase describing the U.S. county that was included in the declaration,yes
+declarationRequestNumber,Declaration Request Number,string,Unique ID assigned to request for a disaster declaration,yes
+lastRefresh,Last Refresh,date,Date the record was last updated in the API data store,yes
+hash,Hash,string,MD5 Hash of the fields and values of the record,no
+id,ID,string,Unique ID assigned to the record,yes
