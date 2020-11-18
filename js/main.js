@@ -4,7 +4,7 @@ class Main {
         // this.tooltip = new Tooltip(this.classSelector);
         // this.info = new Info(this.classSelector);
         // this.cartogram = new Cartogram(this.tooltip, this.classSelector);
-        this.line = new Line(this.classSelector);
+        this.stocks = new Stocks(this.classSelector);
         this.map = new Map(this.classSelector);
         this.timeline = new Timeline(this.classSelector, this.info, this.line);
         this.femaData = {};
@@ -182,7 +182,9 @@ class Main {
     }
 
     reRender(year) {
-        this.map.render(this.terrorData[year]);       
+        this.map.render(this.terrorData[year]);
+        console.log(this.stockData);
+        this.stocks.render(this.stockData); 
     }
     
     selectBrush(years) {
@@ -202,7 +204,7 @@ function selectBrush(years) {
 
 function init() {
     main.loadData();
-    reRender("2008");
+    reRender("2010");
 }
 
 init();
