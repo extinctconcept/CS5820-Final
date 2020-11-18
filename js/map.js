@@ -42,7 +42,7 @@ class Map {
           .append("circle")
           .attr("fill", "blue")
           .attr("transform", `translate(${element})`)
-          .attr("r", 3);
+          .attr("r", 5);
     })
   }
 }

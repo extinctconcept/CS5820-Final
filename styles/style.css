@@ -31,34 +31,35 @@ body {
 
 #info {
     background-color: blue;
-    height: 450px;
+    height: 550px;
     width: 200px;
     margin: 2px;
 }
 
 #flights {
     background-color: orange;
-    height: 200px;
-    width: 200px;
+    height: 275px;
+    width: 40vw;
     margin: 2px;
 }
 
 #map {
-    height: 250px;
-    width: 25vw;
+    background-color: white;
+    height: 275px;
+    width: 40vw;
     margin: 2px;
 }
 
 #stocks {
     background-color: green;
-    height: 200px;
-    width: 200px;
+    height: 275px;
+    width: 40vw;
     margin: 2px;
 }
 
 #debt {
     background-color: pink;
-    height: 200px;
-    width: 200px;
+    height: 275px;
+    width: 40vw;
     margin: 2px;
 }
