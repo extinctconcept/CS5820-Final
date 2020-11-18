@@ -114,12 +114,17 @@ class Main {
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
+        var terrorData = [];
         d3.csv("data/globalterrorismdb_0718dist.csv", d => {
             d.stateCode = this.whatIsStateCode(d.provstate);
-            
+            d.date = new Date(+d.iyear, +d.imonth, +d.iday);
+            if(!terrorData[d.iyear]) {
+                terrorData[d.iyear] = [];
+            }
+            terrorData[d.iyear].push(d);
         })
         .then((data) => {
-            
+            //send terrorData to the methods if you want it grouped by year
         })
         //Stock data
         d3.csv("data/SPY_Historical_Data.csv")
@@ -127,7 +132,9 @@ class Main {
             
         })
         //Flight data
-        d3.csv("data/USCarrier_Traffic_20201106204344.csv")
+        d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
+
+        })
         .then((data) => {
             
         })
