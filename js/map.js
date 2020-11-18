@@ -4,7 +4,7 @@ class Map {
     this.tooltip = tooltip;
   }
 
-  async render(data, year) {
+  async render(data) {
     // data points entering map should be an array of gps coords. This can be refactored however to fit whatever we need it to be 
     let tempData = [[523.3754804030681, 353.07903336329866], [544.5356591678276, 355.4857849174865]]
 
