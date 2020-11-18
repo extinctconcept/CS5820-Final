@@ -21,7 +21,7 @@ class Map {
     let path = d3.geoPath();
     console.log(us);
 
-    const svg = map.append("svg").attr("viewBox", [0, 0, 1075, 910]);
+    const svg = map.append("svg").attr("viewBox", [-225, -50, 1350, 660]);
 
     svg
       .append("path")

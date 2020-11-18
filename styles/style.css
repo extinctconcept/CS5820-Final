@@ -30,11 +30,28 @@ body {
     display: flex;
 }
 
+.chartpanel {
+    justify-items:center;
+    align-items: center;
+}
+
 .title {
     display: flex;
     font-size: 14pt;
     justify-content: center;
     margin: 5px;
+}
+
+.map svg {
+    stroke: black;
+}
+
+.map path {
+    fill: rgb(162, 220, 247);
+}
+
+.map circle {
+    fill: red;
 }
 
 #info-panel {
