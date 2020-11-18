@@ -120,16 +120,13 @@ class Main {
 
     //Load data from csv files.
     //Should only be run once.
-    loadData() {
+    async loadData() {
         //Natural Disaters
         //from FEMA
-        d3.csv("data/DisasterDeclarationsSummaries.csv", d => {
+        await d3.csv("data/DisasterDeclarationsSummaries.csv", d => {
             d.date = new Date(d.incidentBeginDate);
             let year = d.date.getFullYear();
-            if(!this.femaData[year]) {
-                this.femaData[year] = [];
-            }
-            this.femaData[year].push(d);
+            this.arrHelper(this.femaData, year, d);
         })
         .then((data) => {
             this.femaData["columns"] = data.columns;
@@ -137,7 +134,7 @@ class Main {
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
-        d3.csv("data/globalterrorismdb_0718dist.csv", d => {
+        await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
             d.stateCode = this.whatIsStateCode(d.provstate);
             d.date = new Date(+d.iyear, +d.imonth, +d.iday);
             this.arrHelper(this.terrorData, +d.iyear, d);
@@ -147,7 +144,7 @@ class Main {
             // console.log("terrorData: ", this.terrorData,);
         })
         //Stock data
-        d3.csv("data/SPY_Historical_Data.csv", d => {
+        await d3.csv("data/SPY_Historical_Data.csv", d => {
             d.Date = new Date(d.Date);
             let year = d.Date.getFullYear();
             this.arrHelper(this.stockData, year, d);
@@ -157,7 +154,7 @@ class Main {
             // console.log("stockData: ", this.stockData);
         })
         //Flight data
-        d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
+        await d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
             d.date = new Date(d.Period);
             let year = d.date.getFullYear();
             this.arrHelper(this.flightData, year, d);
@@ -170,7 +167,7 @@ class Main {
         //National Debt 2000-2017
         //data saved to two decimals places
         //https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/debt-to-the-penny
-        d3.csv("data/DebtPenny_2000_2017.csv", d => {
+        await d3.csv("data/DebtPenny_2000_2017.csv", d => {
             d.date = new Date(d["Record Date"]);
             let year = d.date.getFullYear();
             this.arrHelper(this.debtData, year, d);
@@ -183,8 +180,7 @@ class Main {
 
     reRender(year) {
         this.map.render(this.terrorData[year]);
-        console.log(this.stockData);
-        this.stocks.render(this.stockData); 
+        this.stocks.render(this.stockData[year]); 
     }
     
     selectBrush(years) {
@@ -202,8 +198,8 @@ function selectBrush(years) {
     main.selectBrush(years);
 }
 
-function init() {
-    main.loadData();
+async function init() {
+    await main.loadData();
     reRender("2010");
 }
 
