@@ -36,10 +36,12 @@ body {
 }
 
 .title {
+    color: white;
+    background-color: black;
     display: flex;
     font-size: 14pt;
     justify-content: center;
-    margin: 5px;
+    padding: 2px;
 }
 
 .map svg {
@@ -68,7 +70,7 @@ body {
 }
 
 #flights {
-    background-color: orange;
+    background-color: white;
     height: 38vh;
     width: 35vw;
     margin: 2px;
@@ -82,14 +84,14 @@ body {
 }
 
 #stocks {
-    background-color: green;
+    background-color: white;
     height: 38vh;
     width: 35vw;
     margin: 2px;
 }
 
 #debt {
-    background-color: pink;
+    background-color: white;
     height: 38vh;
     width: 35vw;
     margin: 2px;
