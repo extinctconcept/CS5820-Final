@@ -1,6 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: black;
+    margin:0px;
 }
 
 .header {
@@ -16,50 +17,63 @@ body {
     display: flex;
     flex-direction: rows;
     margin: 2px;
-    align-content: center;
+    justify-content:center;
 }
 
 .contents {
-    background-color: white;
-    height: 85vh;
-    overflow: auto;
+    background-color: #424242 !important;
+    height: 90vh;
+    overflow: hidden;
 }
 
 .charts{
     display: flex;
 }
 
+.title {
+    display: flex;
+    font-size: 14pt;
+    justify-content: center;
+    margin: 5px;
+}
+
+#info-panel {
+    background-color:rgb(235, 233, 233);
+    height: 72.6vh;
+    width: 20vw;
+}
+
 #info {
-    background-color: blue;
-    height: 550px;
-    width: 200px;
+    background-color:white;
+    height: 76.2vh;
+    width: 20vw;
     margin: 2px;
 }
 
 #flights {
     background-color: orange;
-    height: 275px;
-    width: 40vw;
+    height: 38vh;
+    width: 35vw;
     margin: 2px;
 }
 
 #map {
     background-color: white;
-    height: 275px;
-    width: 40vw;
+    height: 38vh;
+    width: 35vw;
     margin: 2px;
 }
 
 #stocks {
     background-color: green;
-    height: 275px;
-    width: 40vw;
+    height: 38vh;
+    width: 35vw;
     margin: 2px;
 }
 
 #debt {
     background-color: pink;
-    height: 275px;
-    width: 40vw;
+    height: 38vh;
+    width: 35vw;
     margin: 2px;
 }
