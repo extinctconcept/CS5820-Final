@@ -1,3 +1,17 @@
+/*
+ Map Lat and long data should be formatted like this
+ [  
+    {
+     "0": number,
+     "1": number
+    },
+    {
+     "0": number,
+     "1": number
+    }
+]
+*/
+
 class Main {
     constructor() {
         this.classSelector = new ClassSelector();
