@@ -6,7 +6,7 @@ class Map {
 
   async render(data) {
     // data points entering map should be an array of gps coords. This can be refactored however to fit whatever we need it to be 
-    let tempData = [[523.3754804030681, 353.07903336329866], [544.5356591678276, 355.4857849174865]]
+    let tempData = []
 
     let map = d3.select("#map").classed("map", true);
     let margin = { top: 30, right: 0, bottom: 30, left: 0 };
@@ -20,6 +20,22 @@ class Map {
     let us = await d3.json("json/states-albers-10m.json");
     let path = d3.geoPath();
     console.log(us);
+
+    let projection = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+    console.log(projection);
+    let location = [{
+      "0": -94.148036,
+      "1":	36.334145
+    },
+    {
+      "0": -111.834388,
+      "1":	 41.7354862
+    }];
+
+    location.forEach(element => {tempData.push(projection(element))});
+
+
+    console.log(tempData)
 
     const svg = map.append("svg").attr("viewBox", [-225, -50, 1350, 660]);
 
