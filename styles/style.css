@@ -70,6 +70,12 @@ body {
     background-color: white;
 }
 
+#timelineDiv {
+    width: 90.5vw;
+    background-color: white;
+    margin-left: 82.5px;
+}
+
 #info-panel {
     background-color:rgb(235, 233, 233);
     height: 72.6vh;
