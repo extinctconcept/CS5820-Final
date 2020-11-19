@@ -1,8 +1,7 @@
 class Timeline {
-    constructor(classSelector, infoPanel, line) {
+    constructor(classSelector, infoPanel) {
         this.classSelector = classSelector;
         this.infoPanel = infoPanel;
-        this.line = line;
         this.padding = 30;
         this.width = window.innerWidth - 100;
         this.height = 50;
@@ -17,7 +16,6 @@ class Timeline {
 
     render(data, year) {
         if (this.years.length === 0) {
-            this.calculateStateColor(data);
             const radius = 10;
 
             let brush = d3.brushX()
@@ -121,57 +119,5 @@ class Timeline {
         this.selected.classed('highlighted', true);
 
         reRender(year)        
-    }
-
-    calculateStateColor(data) {
-        data['columns'].forEach(column => {
-            let year = parseInt(column);
-            if (!isNaN(year)) {
-                let yearData = {
-                    "year": year,
-                    "min": {
-                        "state": data[0].STATE,
-                        "numBarrels": parseFloat(data[0][year])
-                    },
-                    "max": {
-                        "state": data[0].STATE,
-                        "numBarrels": parseFloat(data[0][year])
-                    },
-                    "bins": {},
-                    "totalBarrels": 0
-                };
-
-                data.forEach(state => {
-                    if (parseFloat(state[year]) > yearData['max']['numBarrels']) {
-                        yearData['max']['state'] = state.STATE;
-                        yearData['max']['numBarrels'] = state[year];
-                    }
-
-                    if (parseFloat(state[year]) < yearData['min']['numBarrels']) {
-                        yearData['min']['state'] = state.STATE;
-                        yearData['min']['numBarrels'] = state[year];
-                    }
-
-                    yearData['totalBarrels'] += parseFloat(state[year]);
-
-                    let status = this.classSelector.chooseClass(state[year]);
-                    if (!yearData['bins'].hasOwnProperty(status)) {
-                        yearData['bins'][status] = 1;
-                    } else {
-                        yearData['bins'][status]++;
-                    }
-                })
-
-                let selectedClass = "bin1";
-                for (let option in yearData['bins']) {
-                    if (yearData['bins'][selectedClass] === undefined || yearData['bins'][option] > yearData['bins'][selectedClass]) {
-                        selectedClass = option;
-                    }
-                }
-                yearData['class'] = selectedClass;
-
-                this.years.push(yearData);
-            }
-        })
     }
 }

@@ -6,7 +6,7 @@ class Main {
         // this.cartogram = new Cartogram(this.tooltip, this.classSelector);
         this.stocks = new Stocks(this.classSelector);
         this.map = new Map(this.classSelector);
-        this.timeline = new Timeline(this.classSelector, this.info, this.line);
+        this.timeline = new Timeline(this.classSelector, this.info);
         this.femaData = {};
         this.terrorData = {};
         this.stockData = {};
@@ -179,6 +179,7 @@ class Main {
     }
 
     reRender(year) {
+        this.timeline.render(this.terrorData,year);
         this.map.render(this.terrorData[year]);
         this.stocks.render(this.stockData[year]); 
     }

@@ -56,6 +56,20 @@ body {
     fill: red;
 }
 
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.lineChart {
+    fill: black;
+}
+
+#timeline {
+    width: 90.5vw;
+    background-color: white;
+}
+
 #info-panel {
     background-color:rgb(235, 233, 233);
     height: 72.6vh;
