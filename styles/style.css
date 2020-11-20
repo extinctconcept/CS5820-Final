@@ -13,6 +13,12 @@ body {
     padding: 30px;
 }
 
+.timelineDiv {
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .chart-containers {
     display: flex;
     flex-direction: rows;
@@ -44,6 +50,11 @@ body {
     padding: 2px;
 }
 
+.line {
+    stroke: black;
+    stroke-width: 2px;
+}
+
 .map svg {
     stroke: black;
 }
@@ -56,25 +67,21 @@ body {
     fill: red;
 }
 
-.row {
-    display: flex;
-    justify-content: center;
-}
-
 .lineChart {
     fill: black;
 }
 
-#timeline {
-    width: 90.5vw;
-    background-color: white;
+.yearChart {
+    fill: rgb(0, 110, 255);
 }
 
-#timelineDiv {
-    width: 90.5vw;
+.brush {
+    width: 100vw;
+}
+
+#timeline {
+    width: 100vw;
     background-color: white;
-    margin-left: 82.5px;
-    margin-top: 20px;
 }
 
 #info-panel {

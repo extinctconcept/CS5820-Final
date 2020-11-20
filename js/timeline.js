@@ -1,9 +1,9 @@
 class Timeline {
-    constructor(classSelector, infoPanel) {
+    constructor(classSelector, infoPanel,line) {
         this.classSelector = classSelector;
         this.infoPanel = infoPanel;
         this.padding = 30;
-        this.width = window.innerWidth - 100;
+        this.width = window.innerWidth;
         this.height = 50;
         this.svg = d3.select("#timeline")
             .attr("width", this.width)
@@ -15,6 +15,7 @@ class Timeline {
     }
 
     render(data, year) {
+        console.log(data);
         if (this.years.length === 0) {
             const radius = 10;
 
@@ -42,28 +43,28 @@ class Timeline {
             ;
 
             this.svg.append("g").attr("class", "brush").call(brush);
-
+    
+            let years = ["2001", "2002", "2003", "2004"];
             let xscale = d3.scaleLinear()
-                .domain([0, this.years.length - 1])
+                .domain([0, years.length - 1])
                 .range([this.padding, this.width - this.padding]);
-        
             this.svg.selectAll('line')
-            .data(this.years)
+            .data(years)
             .enter()
             .append('line')
             .attr('x1', (d, i) => xscale(i))
-            .attr('y1', radius + 4)
+            .attr('y1', radius + 15)
             .attr('x2', (d, i) => i > 0 ? xscale(i - 1) : xscale(i))
-            .attr('y2', radius + 4)
-            .classed('lineChart', true)
+            .attr('y2', radius + 15)
+            .classed('line', true)
             ;
         
             this.svg.selectAll('circle')
-            .data(this.years)
+            .data(years)
             .enter()
             .append('circle')
             .attr('cx', (d, i) => xscale(i))
-            .attr('cy', radius + 4)
+            .attr('cy', radius + 15)
             .attr('r', radius)
             .attr('class', d => d.class)
             .classed('yearChart', true)
@@ -94,14 +95,14 @@ class Timeline {
            });
 
             this.svg.selectAll('text')
-            .data(this.years)
-            .enter()
-            .append('text')
-            .attr('x', (d, i) => xscale(i) - 15)
-            .attr('y', radius + 12)
-            .attr('dy', '1.3em')
-            .text(d => d.year)
-            .classed('yeartext', true)
+                .data(years)
+                .enter()
+                .append('text')
+                .attr('x', (d, i) => xscale(i) -15)
+                .attr('y', radius + 18)
+                .attr('dy', '1.3em')
+                .text(d => d)
+                .classed('yeartext', true)
             ;
         }
     }
