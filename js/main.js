@@ -132,19 +132,38 @@ class Main {
         arr[year].push(data);
     }
 
+    getCoords(state, area) {
+        //the FEMA data has some US territories in it and they're not part of the coords I found
+        if(!!this.counties[state]) {
+            var t = this.counties[state].findIndex(x => area.includes(x.county));
+            //if we find a viable index we return the coords
+            if(t != -1) {
+                return [this.counties[state][t].latitude, this.counties[state][t].longitude];
+            }
+        }
+        //else we return null so we can check for it
+        return null;
+    }
+
     //Load data from csv files.
     //Should only be run once.
     async loadData() {
+        await d3.json("data/counties.json").then(data => {
+            this.counties = data;
+            console.log(this.counties)
+        })
+
         //Natural Disaters
         //from FEMA
         await d3.csv("data/DisasterDeclarationsSummaries.csv", d => {
             d.date = new Date(d.incidentBeginDate);
             let year = d.date.getFullYear();
+            d.coords = this.getCoords(d.state, d.designatedArea);
             this.arrHelper(this.femaData, year, d);
         })
         .then((data) => {
             this.femaData["columns"] = data.columns;
-            // console.log("femaData: ", this.femaData);
+            console.log("femaData: ", this.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
