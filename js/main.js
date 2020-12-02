@@ -212,8 +212,8 @@ class Main {
     }
 
     reRender(year) {
-        this.timeline.render(this.terrorData,year);
-        this.map.render(this.terrorData[year]);
+        this.timeline.render(this.femaData[year],year);
+        this.map.render(this.femaData[year]);
         this.stocks.render(this.stockData[year]); 
     }
     
@@ -234,7 +234,7 @@ function selectBrush(years) {
 
 async function init() {
     await main.loadData();
-    reRender("2010");
+    reRender("2000");
 }
 
 init();

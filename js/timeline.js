@@ -15,7 +15,6 @@ class Timeline {
     }
 
     render(data, year) {
-        console.log(data);
         if (this.years.length === 0) {
             const radius = 10;
 
@@ -68,7 +67,7 @@ class Timeline {
             .attr('r', radius)
             .attr('class', d => d.class)
             .classed('yearChart', true)
-            .attr('id', d => `y${d.year}`)
+            .attr('id', d => `${d}`)
             .classed("highlighted", d => {
                 if (d.year === +year) {
                     this.selected = d3.select(`#y${d.year}`);
@@ -77,7 +76,7 @@ class Timeline {
                 return false;
             })
             .on('click', d => {
-                this.selectYear(d3.select(d3.event.target), d.year);
+                this.selectYear(d3.select(d3.event.target), d);
             })
             .on('mouseover', function (d, i) {
                 d3.select(this).transition()
@@ -108,7 +107,8 @@ class Timeline {
     }
 
     selectBrush(years) {
-        this.line.render(years);
+        console.log(years);
+        reRender(years);
         this.infoPanel.render(years);
     }
 
@@ -118,7 +118,7 @@ class Timeline {
         }
         this.selected = selected;
         this.selected.classed('highlighted', true);
-
+    
         reRender(year)        
     }
 }
