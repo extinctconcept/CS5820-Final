@@ -8,13 +8,18 @@ class Stocks {
     console.log(data);
     let stocks = d3.select("#stocks").classed("stocks", true);
     stocks.selectAll("svg").remove();
-    let margin = { top: 30, right: 0, bottom: 30, left: 0 };
+    let margin = { top: 30, right: 90, bottom: 30, left: 0 };
     //Gets access to the div element created for this chart and legend element from HTML
     let svgBounds = stocks.node().getBoundingClientRect();
     let svgWidth = svgBounds.width - margin.left - margin.right;
-    let svgHeight = svgWidth / 2.5;
+    let svgHeight = svgBounds.height - margin.bottom - margin.top;
+    console.log(svgHeight);
 
     const svg = stocks.append("svg");
+    svg.append("g").classed("xStockAxis",true);
+    svg.append("g").classed("yStockAxis",true);
+    svg.attr("height", svgHeight);
+    svg.attr("height", svgWidth);
 
     let minYear = d3.min(data, (data) => data.Date);
     let maxYear = d3.max(data, (data) => data.Date);
@@ -22,7 +27,6 @@ class Stocks {
     let minStock = d3.min(data, (data) => data.Low);
     let maxStock = d3.max(data, (data) => data.High);
 
-    console.log(minStock, maxStock)
 
     svg.select("#line")
       .attr("width", svgWidth)
@@ -64,9 +68,9 @@ class Stocks {
       // .attr("fill", "black");
 
       let xAxis = d3.axisBottom(xScale);
-      d3.select("#xAxis")
+      d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight + 0})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
@@ -74,7 +78,7 @@ class Stocks {
         .style("text-anchor", "start");
   
       let yAxis = d3.axisLeft(yScale);
-      d3.select("#yAxis")
+      d3.select(".yStockAxis")
         .attr("transform", `translate(${yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");

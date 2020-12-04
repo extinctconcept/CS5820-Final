@@ -77,12 +77,18 @@ body {
     /* align-items: center; */
 }
 
-.stocks > svg {
-    margin-top: 20%;
+text {
+    font-size: 8pt;
+    stroke-width: 0.5px;
+    font-weight: regular;
 }
 
 .stocks > svg {
-    width: 80%;
+    margin-top: 10px;
+}
+
+.stocks > svg {
+    width: auto;
 }
 /* .lineChart {
     fill: black;
