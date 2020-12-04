@@ -41,7 +41,7 @@ class Timeline {
             })
             ;
 
-            this.svg.append("g").attr("class", "brush").call(brush);
+            // this.svg.append("g").attr("class", "brush").call(brush);
     
             let years = ["2000","2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
             let xscale = d3.scaleLinear()
@@ -104,12 +104,6 @@ class Timeline {
                 .classed('yeartext', true)
             ;
         }
-    }
-
-    selectBrush(years) {
-        console.log(years);
-        reRender(years);
-        this.infoPanel.render(years);
     }
 
     selectYear(selected, year) {
