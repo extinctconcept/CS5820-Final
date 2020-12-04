@@ -10,13 +10,12 @@ body {
     font-size: 24pt;
     color: white;
     background: linear-gradient(90deg, rgba(30, 30, 30) 0%, rgba(24, 24, 24) 50%);
-    padding: 30px;
+    padding: 15px;
 }
 
 .timelineDiv {
     display:flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .chart-containers {
@@ -97,13 +96,18 @@ text {
 .yearChart {
     fill: rgb(0, 110, 255);
 }
+.highlighted {
+    fill: rgb(255, 217, 0);
+    stroke: rgb(0, 0, 0);
+    stroke-width: 2px;
+}
 
 .brush {
-    width: 100vw;
+    width: 95.5vw;
 }
 
 #timeline {
-    width: 100vw;
+    width: 90.5vw;
     background-color: white;
 }
 
