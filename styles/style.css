@@ -67,13 +67,33 @@ body {
     stroke:white;
     stroke-width: 2px;
 }
+
 .stocks {
     fill: none;
     display: flex;
     flex-direction: column;
-    stroke: black;
-    stroke-width: 2px;
-    /* align-items: center; */
+}
+
+.stocks > svg  {
+    padding: 10px;
+}
+
+.stocks > svg {
+    width: auto;
+}
+
+.debt {
+    fill: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.debt > svg  {
+    padding: 10px;
+}
+
+.debt > svg {
+    width: auto;
 }
 
 text {
@@ -81,17 +101,6 @@ text {
     stroke-width: 0.5px;
     font-weight: regular;
 }
-
-.stocks > svg {
-    padding: 10px;
-}
-
-.stocks > svg {
-    width: auto;
-}
-/* .lineChart {
-    fill: black;
-} */
 
 .yearChart {
     fill: rgb(0, 110, 255);
