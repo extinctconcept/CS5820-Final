@@ -68,10 +68,25 @@ body {
     stroke:white;
     stroke-width: 2px;
 }
-
-.lineChart {
-    fill: black;
+.stocks {
+    fill: none;
+    display: flex;
+    flex-direction: column;
+    stroke: black;
+    stroke-width: 2px;
+    /* align-items: center; */
 }
+
+.stocks > svg {
+    margin-top: 20%;
+}
+
+.stocks > svg {
+    width: 80%;
+}
+/* .lineChart {
+    fill: black;
+} */
 
 .yearChart {
     fill: rgb(0, 110, 255);
