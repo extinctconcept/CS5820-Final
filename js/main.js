@@ -19,6 +19,7 @@ class Main {
         // this.info = new Info(this.classSelector);
         // this.cartogram = new Cartogram(this.tooltip, this.classSelector);
         this.stocks = new Stocks(this.classSelector);
+        this.flights = new Flights(this.classSelector);
         this.map = new Map(this.classSelector);
         this.timeline = new Timeline(this.classSelector, this.info);
         this.femaData = {};
@@ -214,7 +215,8 @@ class Main {
     reRender(year) {
         this.timeline.render(this.femaData[year],year);
         this.map.render(this.femaData[year]);
-        this.stocks.render(this.stockData[year]); 
+        this.stocks.render(this.stockData[year]);
+        this.flights.render(this.flightData[year]); 
     }
     
     selectBrush(years) {
