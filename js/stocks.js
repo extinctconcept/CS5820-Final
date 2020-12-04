@@ -12,7 +12,7 @@ class Stocks {
     //Gets access to the div element created for this chart and legend element from HTML
     let svgBounds = stocks.node().getBoundingClientRect();
     let svgWidth = svgBounds.width - margin.left - margin.right;
-    let svgHeight = svgBounds.height - margin.bottom - margin.top;
+    let svgHeight = svgBounds.height - margin.bottom - margin.top + 10;
     console.log(svgHeight);
 
     const svg = stocks.append("svg");
@@ -48,7 +48,7 @@ class Stocks {
     let yScale = d3
       .scaleLinear()
       .domain([parseFloat(minStock), parseFloat(maxStock)])
-      .range([svgHeight, 0]);
+      .range([svgHeight - 10, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
@@ -70,7 +70,7 @@ class Stocks {
       let xAxis = d3.axisBottom(xScale);
       d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 10})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
