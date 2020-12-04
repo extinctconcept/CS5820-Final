@@ -47,7 +47,8 @@ class Map {
       .append("path")
       .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
       .attr("fill", "none")
-      .attr("stroke", "black")
+      .attr("stroke", "white")
+      .attr("stroke-width", "2px")
       .attr("stroke-linejoin", "round")
       .attr("d", path);
 

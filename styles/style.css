@@ -56,15 +56,17 @@ body {
 }
 
 .map svg {
-    stroke: black;
+    stroke: white;
 }
 
 .map path {
-    fill: rgb(162, 220, 247);
+    fill: rgb(48, 48, 48);
 }
 
 .map circle {
-    fill: red;
+    fill:rgb(0, 110, 255);
+    stroke:white;
+    stroke-width: 2px;
 }
 
 .lineChart {
