@@ -18,6 +18,7 @@ class Main {
         // this.tooltip = new Tooltip(this.classSelector);
         // this.info = new Info(this.classSelector);
         // this.cartogram = new Cartogram(this.tooltip, this.classSelector);
+        this.infoPanel = new InfoPanel(this.classSelector);
         this.stocks = new Stocks(this.classSelector);
         this.flights = new Flights(this.classSelector);
         this.map = new Map(this.classSelector);
@@ -181,7 +182,11 @@ class Main {
         await d3.csv("data/SPY_Historical_Data.csv", d => {
             d.Date = new Date(d.Date);
             let year = d.Date.getFullYear();
-            this.arrHelper(this.stockData, year, d);
+            // this.arrHelper(this.stockData, year, d);
+            if(!this.stockData[year]) {
+                this.stockData[year] = [];
+            }
+            this.stockData[year].unshift(d);
         })
         .then((data) => {
             this.stockData["columns"] = data.columns;
@@ -207,7 +212,8 @@ class Main {
             this.arrHelper(this.debtData, year, d);
         })
         .then((data) => {
-            this.debtData["columns"] = data.columns;
+            // this.debtData.reverse();
+            // this.debtData["columns"] = data.columns;
             // console.log("debtData: ", this.debtData);
         })
     }

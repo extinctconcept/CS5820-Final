@@ -5,7 +5,7 @@ class Stocks {
   }
 
   render(data) {
-    data.reverse();
+
     let stocks = d3.select("#stocks").classed("stocks", true);
     stocks.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
