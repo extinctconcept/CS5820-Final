@@ -36,19 +36,19 @@ class Stocks {
     let dates = [];
     data.forEach(function (d) {
       let date = new Date(d.Date);
-      let item = date.valueOf();
-      console.log(item);
-      dates.push(item);
+      let item = date.toLocaleDateString();
+ 
+      dates.push(date);
     });
-
+    dates.reverse();
     console.log(dates);
 
-    let xScale = d3.scaleBand().domain(dates).range([0, svgWidth]);
+    let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]);
 
     let yScale = d3
       .scaleLinear()
       .domain([parseFloat(minStock), parseFloat(maxStock)])
-      .range([svgHeight - 10, 0]);
+      .range([svgHeight - 50, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
@@ -67,10 +67,10 @@ class Stocks {
       .attr("stroke-width", 2)
       // .attr("fill", "black");
 
-      let xAxis = d3.axisBottom(xScale);
+      let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%d"));
       d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 10})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 50})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
