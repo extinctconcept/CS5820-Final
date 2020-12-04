@@ -12,14 +12,14 @@ class Stocks {
     //Gets access to the div element created for this chart and legend element from HTML
     let svgBounds = stocks.node().getBoundingClientRect();
     let svgWidth = svgBounds.width - margin.left - margin.right;
-    let svgHeight = svgBounds.height - margin.bottom - margin.top + 10;
+    let svgHeight = svgBounds.height - margin.bottom - margin.top;
     console.log(svgHeight);
 
     const svg = stocks.append("svg");
     svg.append("g").classed("xStockAxis",true);
     svg.append("g").classed("yStockAxis",true);
-    svg.attr("height", svgHeight);
-    svg.attr("height", svgWidth);
+    svg.attr("height", svgHeight + margin.bottom);
+    svg.attr("width", svgWidth);
 
     let minYear = d3.min(data, (data) => data.Date);
     let maxYear = d3.max(data, (data) => data.Date);
