@@ -138,7 +138,7 @@ class Main {
             var t = this.counties[state].findIndex(x => area.includes(x.county));
             //if we find a viable index we return the coords
             if(t != -1) {
-                return [this.counties[state][t].latitude, this.counties[state][t].longitude];
+                return {"0": this.counties[state][t].longitude, "1": this.counties[state][t].latitude};
             }
         }
         //else we return null so we can check for it
@@ -150,7 +150,7 @@ class Main {
     async loadData() {
         await d3.json("data/counties.json").then(data => {
             this.counties = data;
-            console.log(this.counties)
+            // console.log(this.counties)
         })
 
         //Natural Disaters
@@ -163,7 +163,7 @@ class Main {
         })
         .then((data) => {
             this.femaData["columns"] = data.columns;
-            console.log("femaData: ", this.femaData);
+            // console.log("femaData: ", this.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017

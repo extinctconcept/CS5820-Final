@@ -29,7 +29,8 @@ class Map {
 
     data.forEach(element => {
       if(element.coords) {
-        locations.push(projection({"0": parseFloat(element.coords[1]), "1": parseFloat(element.coords[0])}))
+        // locations.push(projection({"0": parseFloat(element.coords[1]), "1": parseFloat(element.coords[0])}))
+        locations.push(projection(element.coords))
       }
     });
 
