@@ -83,7 +83,7 @@ body {
 }
 
 .debt {
-    fill: none;
+    /* fill: black; */
     display: flex;
     flex-direction: column;
 }

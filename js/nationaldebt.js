@@ -48,9 +48,10 @@ class Debt {
 
     let yaxisWidth = 60;
     const drawLine = d3
-      .line()
+      .area()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
-      .y((d) => yScale(+d.High));
+      .y0(svgHeight - 40)
+      .y1((d) => yScale(+d.High));
 
     svg
       .selectAll("path")
@@ -61,6 +62,7 @@ class Debt {
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
+      .attr("fill", "steelblue");
       // .attr("fill", "black");
 
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
