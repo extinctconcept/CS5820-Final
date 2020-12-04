@@ -164,7 +164,7 @@ class Main {
             this.arrHelper(this.femaData, year, d);
         })
         .then((data) => {
-            this.femaData["columns"] = data.columns;
+            // this.femaData["columns"] = data.columns;
             // console.log("femaData: ", this.femaData);
         })
         //Terrorism data
@@ -175,7 +175,7 @@ class Main {
             this.arrHelper(this.terrorData, +d.iyear, d);
         })
         .then((data) => {
-            this.terrorData["columns"] = data.columns;
+            // this.terrorData["columns"] = data.columns;
             // console.log("terrorData: ", this.terrorData,);
         })
         //Stock data
@@ -183,13 +183,15 @@ class Main {
             d.Date = new Date(d.Date);
             let year = d.Date.getFullYear();
             // this.arrHelper(this.stockData, year, d);
+            d.Low = +d.Low;
+            d.High = +d.High;
             if(!this.stockData[year]) {
                 this.stockData[year] = [];
             }
             this.stockData[year].unshift(d);
         })
         .then((data) => {
-            this.stockData["columns"] = data.columns;
+            // this.stockData["columns"] = data.columns;
             // console.log("stockData: ", this.stockData);
         })
         //Flight data
@@ -199,7 +201,7 @@ class Main {
             this.arrHelper(this.flightData, year, d);
         })
         .then((data) => {
-            this.flightData["columns"] = data.columns;
+            // this.flightData["columns"] = data.columns;
             // console.log("flightData: ", this.flightData);
         })
 

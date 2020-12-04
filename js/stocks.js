@@ -5,7 +5,7 @@ class Stocks {
   }
 
   render(data) {
-
+    console.log(data)
     let stocks = d3.select("#stocks").classed("stocks", true);
     stocks.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -26,7 +26,7 @@ class Stocks {
     let minStock = d3.min(data, (data) => data.Low);
     let maxStock = d3.max(data, (data) => data.High);
 
-
+    console.log(minStock, maxStock)
     svg.select("#line")
       .attr("width", svgWidth)
       .attr("height", svgHeight)
@@ -43,14 +43,14 @@ class Stocks {
 
     let yScale = d3
       .scaleLinear()
-      .domain([parseFloat(minStock), parseFloat(maxStock)])
-      .range([svgHeight - 40, 0]);
+      .domain([minStock, maxStock])
+      .range([svgHeight - 35, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
       .line()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
-      .y((d) => yScale(+d.High));
+      .y((d) => yScale(d.High));
 
     svg
       .selectAll("path")
@@ -66,7 +66,7 @@ class Stocks {
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 40})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 35})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
