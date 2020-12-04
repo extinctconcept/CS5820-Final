@@ -5,9 +5,12 @@ body {
 }
 
 .header {
-    display: flex;
-    justify-content: start;
+    position:fixed;
+    /* display: flex; */
+    /* justify-content: start; */
     font-size: 24pt;
+    width: 100%;
+    height: 3vh;
     color: white;
     background: linear-gradient(90deg, rgba(30, 30, 30) 0%, rgba(24, 24, 24) 50%);
     padding: 30px;
@@ -16,7 +19,7 @@ body {
 .timelineDiv {
     display:flex;
     justify-content: center;
-    margin-top: 20px;
+    padding-top: 10vh;
 }
 
 .chart-containers {
@@ -28,15 +31,12 @@ body {
 
 .contents {
     background-color: #424242 !important;
-    height: 90vh;
-    overflow: hidden;
-}
-
-.charts{
-    display: flex;
+    /* height: 90vh; */
+    /* overflow: hidden; */
 }
 
 .chartpanel {
+    overflow-y:true;
     justify-items:center;
     align-items: center;
 }
@@ -90,9 +90,6 @@ text {
 .stocks > svg {
     width: auto;
 }
-/* .lineChart {
-    fill: black;
-} */
 
 .yearChart {
     fill: rgb(0, 110, 255);
@@ -108,42 +105,42 @@ text {
 }
 
 #info-panel {
-    background-color:rgb(235, 233, 233);
-    height: 72.6vh;
+    background-color:white;
+    height: 77vh;
     width: 20vw;
+    margin: 5px;
 }
 
 #info {
-    background-color:white;
-    height: 76.2vh;
+    background-color:rgb(235, 233, 233);
+    height: 77vh;
     width: 20vw;
-    margin: 2px;
 }
 
 #flights {
     background-color: white;
-    height: 38vh;
-    width: 35vw;
-    margin: 2px;
+    height: 80vh;
+    width: 75vw;
+    margin: 5px;
 }
 
 #map {
     background-color: white;
-    height: 38vh;
-    width: 35vw;
-    margin: 2px;
+    height: 80vh;
+    width: 75vw;
+    margin: 5px;
 }
 
 #stocks {
     background-color: white;
-    height: 38vh;
-    width: 35vw;
-    margin: 2px;
+    height: 80vh;
+    width: 75vw;
+    margin: 5px;
 }
 
 #debt {
     background-color: white;
-    height: 38vh;
-    width: 35vw;
-    margin: 2px;
+    height: 80vh;
+    width: 75vw;
+    margin: 5px;
 }
