@@ -7,6 +7,7 @@ class Stocks {
   render(data) {
     console.log(data);
     let stocks = d3.select("#stocks").classed("stocks", true);
+    stocks.selectAll("svg").remove();
     let margin = { top: 30, right: 0, bottom: 30, left: 0 };
     //Gets access to the div element created for this chart and legend element from HTML
     let svgBounds = stocks.node().getBoundingClientRect();
