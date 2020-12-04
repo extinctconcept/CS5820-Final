@@ -5,7 +5,7 @@ class Debt {
   }
 
   render(data) {
-
+    console.log(data);
     let debt = d3.select("#debt").classed("debt", true);
     debt.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -23,8 +23,8 @@ class Debt {
     let minYear = d3.min(data, (data) => data.Date);
     let maxYear = d3.max(data, (data) => data.Date);
     
-    let minStock = d3.min(data, (data) => data.Low);
-    let maxStock = d3.max(data, (data) => data.High);
+    let minStock = d3.min(data, (data) => data["Total Public Debt Outstanding"]/1000000);
+    let maxStock = d3.max(data, (data) => data["Total Public Debt Outstanding"]/1000000);
 
 
     svg.select("#line")
@@ -34,10 +34,11 @@ class Debt {
 
     let dates = [];
     data.forEach(function (d) {
-      let date = new Date(d.Date);
+      let date = new Date(d["Record Date"]);
       dates.push(date);
     });
 
+    console.log(dates);
 
     let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]).nice();
 
@@ -49,9 +50,9 @@ class Debt {
     let yaxisWidth = 60;
     const drawLine = d3
       .area()
-      .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
+      .x((d) => xScale(new Date(d["Record Date"]).valueOf()) + xScale(dates[1]) / 2)
       .y0(svgHeight - 40)
-      .y1((d) => yScale(+d.High));
+      .y1((d) => yScale(+d["Total Public Debt Outstanding"]/1000000));
 
     svg
       .selectAll("path")

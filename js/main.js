@@ -226,7 +226,7 @@ class Main {
         this.map.render(this.femaData[year]);
         this.stocks.render(this.stockData[year]);
         this.flights.render(this.flightData[year]);
-        this.debt.render(this.stockData[year]); 
+        this.debt.render(this.debtData[year]); 
     }
     
     selectBrush(years) {
