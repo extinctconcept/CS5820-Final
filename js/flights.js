@@ -5,6 +5,7 @@ class Flights {
   }
 
   render(data) {
+  	console.log(data);
   	let flights = d3.select("#stocks").classed("flights", true);
   	flights.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
