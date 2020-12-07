@@ -115,6 +115,14 @@ text {
     width: 95.5vw;
 }
 
+.text-hover {
+    font-weight: bold;
+}
+
+.text-normal {
+    font-weight: normal;
+}
+
 #timeline {
     width: 90.5vw;
     background-color: white;

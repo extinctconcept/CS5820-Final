@@ -29,6 +29,8 @@ class Main {
         this.stockData = {};
         this.flightData = {};
         this.debtData = {};
+        //adjust this with out dropdown
+        this.selectedData = "FEMA";
     }
 
 
@@ -163,10 +165,20 @@ class Main {
             let year = d.date.getFullYear();
             d.coords = this.getCoords(d.state, d.designatedArea);
             this.arrHelper(this.femaData, year, d);
+            
         })
         .then((data) => {
+            for(let e in this.femaData) {
+                let events = [];
+                this.femaData[e].forEach(d => {
+                    if(!events.includes(d.declarationTitle)) {
+                        events.push(d.declarationTitle);
+                    }  
+                })
+                this.femaData[e].push(events);
+            };
             // this.femaData["columns"] = data.columns;
-            // console.log("femaData: ", this.femaData);
+            console.log("femaData: ", this.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
@@ -222,8 +234,16 @@ class Main {
     }
 
     reRender(year) {
-        this.timeline.render(this.femaData[year],year);
-        this.map.render(this.femaData[year]);
+        if(this.selectedData == "FEMA") {
+            this.infoPanel.render(this.femaData[year], this.selectData);
+            this.timeline.render(this.femaData[year],year);
+            this.map.render(this.femaData[year]);
+        }
+        else {
+            this.infoPanel.render(this.terrorData[year], this.selectData);
+            this.timeline.render(this.terrorData[year],year);
+            this.map.render(this.terrorData[year]);
+        }
         this.stocks.render(this.stockData[year]);
         this.flights.render(this.flightData[year]);
         this.debt.render(this.debtData[year]); 
