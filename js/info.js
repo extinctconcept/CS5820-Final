@@ -27,7 +27,7 @@ class InfoPanel {
         var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
 
         const svg = vm.panel.append("svg");
-        svg.attr("height",(vm.eventsList.length*15));
+        svg.attr("height",(vm.eventsList.length*15)+10);
         svg.attr("width", svgWidth);
 
 
