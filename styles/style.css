@@ -140,6 +140,10 @@ text {
     stroke-width: 2px;
 }
 
+.selected-info {
+    stroke: blue;
+}
+
 .brush {
     width: 95.5vw;
 }
@@ -150,7 +154,7 @@ text {
 
 #info-panel {
     background-color:rgb(235, 233, 233);
-    height: 72.6vh;
+    height: 73.1vh;
     width: 20vw;
     overflow-y: auto;
     display: flex;

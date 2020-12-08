@@ -32,6 +32,9 @@ class InfoPanel {
             .append("text")
             .classed("text-normal", true)
             .on("click", function() {
+
+                d3.select(this).classed("selected-info", true);
+                
                 // if(!this.selectedEvent) {
                 //     this.selectedEvent = d3.select(this);
                 // }

@@ -52,12 +52,14 @@ class Stocks {
     const drawLine = d3
       .line()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
-      .y((d) => yScale(d.High));
+      .y((d) => yScale(d.High))
+      .curve(d3.curveStep);
 
     const drawLowLine = d3
       .line()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
-      .y((d) => yScale(d.Low));
+      .y((d) => yScale(d.Low))
+      .curve(d3.curveStep);
 
     svg
       .selectAll(".highPath")
@@ -67,14 +69,16 @@ class Stocks {
       .attr("d", drawLine(data))
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2)
       .attr("opacity", .008)
       .on('mouseover', function (d, i) {
          d3.select(this)
+         .attr("stroke-width", 3)
             .attr("opacity", .99);
            })
        .on('mouseout', function (d, i) {
          d3.select(this)
+         .attr("stroke-width", 2)
             .attr("opacity", .008);
            });
 
@@ -86,14 +90,16 @@ class Stocks {
       .attr("d", drawLowLine(data))
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#cc0418")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2)
       .attr("opacity", .008)
       .on('mouseover', function (d, i) {
          d3.select(this)
+         .attr("stroke-width", 3)
             .attr("opacity", .99);
            })
        .on('mouseout', function (d, i) {
          d3.select(this)
+         .attr("stroke-width", 2)
             .attr("opacity", .008);
            });
 
