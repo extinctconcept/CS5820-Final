@@ -59,7 +59,7 @@ class Flights {
       .enter()
       .append("path")
       .attr("d", drawLine(data))
-      .attr("transform", `translate(${yaxisWidth},0)`)
+      .attr("transform", `translate(${yaxisWidth - 25},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
       .attr("fill", "transparent");
@@ -76,7 +76,7 @@ class Flights {
   
       let yAxis = d3.axisLeft(yScale);
       d3.select(".yFlightAxis")
-        .attr("transform", `translate(${yaxisWidth}, 0)`)
+        .attr("transform", `translate(${yaxisWidth}, 5)`)
         .call(yAxis)
         .selectAll("text");
   }

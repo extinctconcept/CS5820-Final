@@ -15,6 +15,7 @@ class Timeline {
     }
 
     render(data, year) {
+        var first = true;
         if (this.years.length === 0) {
             const radius = 10;
 
@@ -67,10 +68,10 @@ class Timeline {
             .attr('r', radius)
             .attr('class', d => d.class)
             .classed('yearChart', true)
-            .attr('id', d => `${d}`)
+            .attr('id', d => "y" + `${d}`)
             .classed("highlighted", d => {
-                if (d.year === +year) {
-                    this.selected = d3.select(`#y${d.year}`);
+                if (d == 2000 && first == true) {
+                    this.selected = d3.select(`#y${d}`);
                     return true;
                 }
                 return false;
@@ -103,6 +104,7 @@ class Timeline {
                 .text(d => d)
                 .classed('yeartext', true)
             ;
+            first = false
         }
     }
 
@@ -112,7 +114,6 @@ class Timeline {
         }
         this.selected = selected;
         this.selected.classed('highlighted', true);
-    
         reRender(year)        
     }
 }
