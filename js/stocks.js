@@ -53,13 +53,13 @@ class Stocks {
       .line()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
       .y((d) => yScale(d.High))
-      .curve(d3.curveStep);
+      .curve(d3.curveLinear);
 
     const drawLowLine = d3
       .line()
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
       .y((d) => yScale(d.Low))
-      .curve(d3.curveStep);
+      .curve(d3.curveLinear);
 
     svg
       .selectAll(".highPath")
@@ -118,5 +118,6 @@ class Stocks {
         .attr("transform", `translate(${yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");
+
   }
 }
