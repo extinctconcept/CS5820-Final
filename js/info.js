@@ -29,7 +29,6 @@ class InfoPanel {
             .data(this.eventsList)
             .enter()
             .append("text")
-            .style("font-size", ".8em")
             .classed("text-normal", true)
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false)

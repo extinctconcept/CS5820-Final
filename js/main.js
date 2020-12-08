@@ -155,7 +155,6 @@ class Main {
     async loadData() {
         await d3.json("data/counties.json").then(data => {
             this.counties = data;
-            // console.log(this.counties)
         })
 
         //Natural Disaters
@@ -177,18 +176,26 @@ class Main {
                 })
                 this.femaData[e].push(events);
             };
-            // this.femaData["columns"] = data.columns;
-            console.log("femaData: ", this.femaData);
+            // console.log("femaData: ", this.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
         await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
             d.stateCode = this.whatIsStateCode(d.provstate);
             d.date = new Date(+d.iyear, +d.imonth, +d.iday);
+            d.coords = {"0": d.longitude, "1": d.latitude};
             this.arrHelper(this.terrorData, +d.iyear, d);
         })
         .then((data) => {
-            // this.terrorData["columns"] = data.columns;
+            for(let e in this.terrorData) {
+                let events = [];
+                this.terrorData[e].forEach(d => {
+                    if(!events.includes(d.targtype1_txt)) {
+                        events.push(d.targtype1_txt);
+                    }  
+                })
+                this.terrorData[e].push(events);
+            };
             // console.log("terrorData: ", this.terrorData,);
         })
         //Stock data
@@ -204,7 +211,6 @@ class Main {
             this.stockData[year].unshift(d);
         })
         .then((data) => {
-            // this.stockData["columns"] = data.columns;
             // console.log("stockData: ", this.stockData);
         })
         //Flight data
