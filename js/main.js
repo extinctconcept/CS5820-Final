@@ -17,7 +17,7 @@ class Main {
         this.classSelector = new ClassSelector();
         // this.tooltip = new Tooltip(this.classSelector);
         this.map = new Map(this.classSelector);
-        this.flights = new Flights(this.classSelector);
+        this.flights = new Flights();
         this.stocks = new Stocks(this.classSelector);
         this.debt = new Debt(this.classSelector);
         this.infoPanel = new InfoPanel(this.map, this.flights, this.stocks, this.debt);
@@ -151,8 +151,9 @@ class Main {
     //Load data from csv files.
     //Should only be run once.
     async loadData() {
+        var vm = this;
         await d3.json("data/counties.json").then(data => {
-            this.counties = data;
+            vm.counties = data;
         })
 
         //Natural Disaters
@@ -160,65 +161,65 @@ class Main {
         await d3.csv("data/DisasterDeclarationsSummaries.csv", d => {
             d.date = new Date(d.incidentBeginDate);
             let year = d.date.getFullYear();
-            d.coords = this.getCoords(d.state, d.designatedArea);
-            this.arrHelper(this.femaData, year, d);
+            d.coords = vm.getCoords(d.state, d.designatedArea);
+            vm.arrHelper(vm.femaData, year, d);
             
         })
         .then((data) => {
-            for(let e in this.femaData) {
+            for(let e in vm.femaData) {
                 let events = [];
-                this.femaData[e].forEach(d => {
+                vm.femaData[e].forEach(d => {
                     if(!events.includes(d.declarationTitle)) {
                         events.push(d.declarationTitle);
                     }  
                 })
-                this.femaData[e].push(events);
+                vm.femaData[e].push(events);
             };
-            // console.log("femaData: ", this.femaData);
+            // console.log("femaData: ", vm.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
         await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
-            d.stateCode = this.whatIsStateCode(d.provstate);
+            d.stateCode = vm.whatIsStateCode(d.provstate);
             d.date = new Date(+d.iyear, +d.imonth, +d.iday);
             d.coords = {"0": d.longitude, "1": d.latitude};
-            this.arrHelper(this.terrorData, +d.iyear, d);
+            vm.arrHelper(vm.terrorData, +d.iyear, d);
         })
         .then((data) => {
-            for(let e in this.terrorData) {
+            for(let e in vm.terrorData) {
                 let events = [];
-                this.terrorData[e].forEach(d => {
+                vm.terrorData[e].forEach(d => {
                     if(!events.includes(d.targtype1_txt)) {
                         events.push(d.targtype1_txt);
                     }  
                 })
-                this.terrorData[e].push(events);
+                vm.terrorData[e].push(events);
             };
-            // console.log("terrorData: ", this.terrorData,);
+            // console.log("terrorData: ", vm.terrorData,);
         })
         //Stock data
         await d3.csv("data/SPY_Historical_Data.csv", d => {
             d.Date = new Date(d.Date);
             let year = d.Date.getFullYear();
-            // this.arrHelper(this.stockData, year, d);
+            // vm.arrHelper(vm.stockData, year, d);
             d.Low = +d.Low;
             d.High = +d.High;
-            if(!this.stockData[year]) {
-                this.stockData[year] = [];
+            if(!vm.stockData[year]) {
+                vm.stockData[year] = [];
             }
-            this.stockData[year].unshift(d);
+            vm.stockData[year].unshift(d);
         })
         .then((data) => {
-            // console.log("stockData: ", this.stockData);
+            // console.log("stockData: ", vm.stockData);
         })
         //Flight data
         await d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
-            d.date = new Date(d.Period);
-            let year = d.date.getFullYear();
-            this.arrHelper(this.flightData, year, d);
+            let year = d.Period.slice(d.Period.length-4, d.Period.length);
+            d.Total = +d.Total;
+            vm.arrHelper(vm.flightData, year, d);
         })
         .then((data) => {
-            // console.log("flightData: ", this.flightData);
+            console.log("flightData: ", vm.flightData);
         })
 
         //National Debt 2000-2017
@@ -227,26 +228,27 @@ class Main {
         await d3.csv("data/DebtPenny_2000_2017.csv", d => {
             d.date = new Date(d["Record Date"]);
             let year = d.date.getFullYear();
-            this.arrHelper(this.debtData, year, d);
+            vm.arrHelper(vm.debtData, year, d);
         })
         .then((data) => {
-            // console.log("debtData: ", this.debtData);
+            // console.log("debtData: ", vm.debtData);
         })
     }
 
     reRender(year) {
-        if(this.selectedData == "FEMA") {
-            this.infoPanel.render(this.femaData[year], this.selectData);
-            this.timeline.render(this.femaData[year],year);
-            this.map.render(this.femaData[year]);
+        var vm = this;
+        if(vm.selectedData == "FEMA") {
+            vm.infoPanel.render(vm.femaData[year], vm.selectData);
+            vm.timeline.render(vm.femaData[year],year);
+            vm.map.render(vm.femaData[year]);
         } else {
-            this.infoPanel.render(this.terrorData[year], this.selectData);
-            this.timeline.render(this.terrorData[year],year);
-            this.map.render(this.terrorData[year]);
+            vm.infoPanel.render(vm.terrorData[year], vm.selectData);
+            vm.timeline.render(vm.terrorData[year],year);
+            vm.map.render(vm.terrorData[year]);
         }
-        this.stocks.render(this.stockData[year]);
-        this.debt.render(this.debtData[year]); 
-        this.flights.render(this.flightData[year]);
+        vm.stocks.render(vm.stockData[year]);
+        vm.debt.render(vm.debtData[year]); 
+        vm.flights.render(vm.flightData[year]);
     }
     
     selectBrush(years) {
