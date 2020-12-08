@@ -67,7 +67,7 @@ class Stocks {
       .attr("d", drawLine(data))
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
-      .attr("stroke-width", 1)
+      .attr("stroke-width", 1.5)
       .attr("opacity", .008)
       .on('mouseover', function (d, i) {
          d3.select(this)
@@ -86,7 +86,7 @@ class Stocks {
       .attr("d", drawLowLine(data))
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#cc0418")
-      .attr("stroke-width", 1)
+      .attr("stroke-width", 1.5)
       .attr("opacity", .008)
       .on('mouseover', function (d, i) {
          d3.select(this)
