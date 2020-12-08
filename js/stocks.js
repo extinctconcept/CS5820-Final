@@ -70,7 +70,7 @@ class Stocks {
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
-      .attr("opacity", .008)
+      .attr("opacity", .08)
       .on('mouseover', function (d, i) {
          d3.select(this)
          .attr("stroke-width", 3)
@@ -79,7 +79,7 @@ class Stocks {
        .on('mouseout', function (d, i) {
          d3.select(this)
          .attr("stroke-width", 2)
-            .attr("opacity", .008);
+            .attr("opacity", .08);
            });
 
     svg
