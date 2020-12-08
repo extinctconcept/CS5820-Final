@@ -139,6 +139,7 @@ text {
     background-color:rgb(235, 233, 233);
     height: 72.6vh;
     width: 20vw;
+    overflow-y: auto;
 }
 
 #info {

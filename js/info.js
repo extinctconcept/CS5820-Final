@@ -4,8 +4,7 @@ class InfoPanel {
         this.panel = d3.select("#info-panel").classed("info", true);
         this.svgBounds = this.panel.node().getBoundingClientRect();
         this.margin = { top: 30, right: 10, bottom: 10, left: 0 };
-        this.svgWidth = this.svgBounds.width - this.margin.left - this.margin.right;
-        this.svgHeight = this.svgBounds.height - this.margin.bottom - this.margin.top;
+
 
         this.eventsList = [];
     }
@@ -15,13 +14,14 @@ class InfoPanel {
         this.eventsList = [];
         this.panel.selectAll("svg").remove();
         this.eventsList = data.slice(data.length-1, data.length).flat();
-        // console.log(this.eventsList)
+        var svgWidth = this.svgBounds.width - this.margin.left - this.margin.right;
+        // var svgHeight = this.svgBounds.height - this.margin.bottom - this.margin.top;
 
         const svg = this.panel.append("svg");
         // svg.append("g").classed("xStockAxis",true);
         // svg.append("g").classed("yStockAxis",true);
-        svg.attr("height", this.svgHeight + this.margin.bottom);
-        svg.attr("width", this.svgWidth);
+        svg.attr("height",(this.eventsList.length*15));
+        svg.attr("width", svgWidth);
 
 
         svg.append("g")
@@ -29,16 +29,17 @@ class InfoPanel {
             .data(this.eventsList)
             .enter()
             .append("text")
-            .style("font-size", ".5em")
+            .style("font-size", ".8em")
             .classed("text-normal", true)
-            .on("mouseover", (d) => {
-                // console.log(d3.select(this))
-                // d3.select(this).classed("text-hover", true)
+            .on("mouseover", function() {
+                d3.select(this).classed("text-normal", false)
+                d3.select(this).classed("text-hover", true)
             })
-            .on("mouseout", (d) => {
-                // d3.select(this).classed("text-hover", false)
+            .on("mouseout", function() {
+                d3.select(this).classed("text-hover", false)
+                d3.select(this).classed("text-normal", true)
             })
-            .attr("x", "20")
+            .attr("x", "5")
             .attr("y", (d,i) => (i+1)*15)
             .text(d => d)
 
