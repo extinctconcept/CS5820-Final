@@ -238,30 +238,41 @@ class Main {
             this.infoPanel.render(this.femaData[year], this.selectData);
             this.timeline.render(this.femaData[year],year);
             this.map.render(this.femaData[year]);
-        }
-        else {
+        } else {
             this.infoPanel.render(this.terrorData[year], this.selectData);
             this.timeline.render(this.terrorData[year],year);
             this.map.render(this.terrorData[year]);
         }
         this.stocks.render(this.stockData[year]);
-        this.flights.render(this.flightData[year]);
         this.debt.render(this.debtData[year]); 
+        this.flights.render(this.flightData[year]);
     }
     
     selectBrush(years) {
         this.timeline.selectBrush(years);
     }
+
+    setSelectedData(radio, year) {
+        this.selectedData = radio;
+        this.reRender(year);
+    }
 }
 
 const main = new Main();
+let yearVar = "2000";
 
 function reRender(year) {
+    yearVar = year;
     main.reRender(year);
 }
 
 function selectBrush(years) {
     main.selectBrush(years);
+}
+
+function setSelectedData(radio) {
+    console.log(yearVar);
+    main.setSelectedData(radio.value, yearVar);
 }
 
 async function init() {

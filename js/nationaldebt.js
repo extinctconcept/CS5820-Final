@@ -5,7 +5,7 @@ class Debt {
   }
 
   render(data) {
-    console.log(data);
+    console.log(" Debt: ",data);
     let debt = d3.select("#debt").classed("debt", true);
     debt.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
