@@ -68,7 +68,15 @@ class Stocks {
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 1)
-      // .attr("fill", "black");
+      .attr("opacity", .008)
+      .on('mouseover', function (d, i) {
+         d3.select(this)
+            .attr("opacity", .99);
+           })
+       .on('mouseout', function (d, i) {
+         d3.select(this)
+            .attr("opacity", .008);
+           });
 
     svg
       .selectAll(".lowPath")
@@ -79,6 +87,15 @@ class Stocks {
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#cc0418")
       .attr("stroke-width", 1)
+      .attr("opacity", .008)
+      .on('mouseover', function (d, i) {
+         d3.select(this)
+            .attr("opacity", .99);
+           })
+       .on('mouseout', function (d, i) {
+         d3.select(this)
+            .attr("opacity", .008);
+           });
 
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xStockAxis")
