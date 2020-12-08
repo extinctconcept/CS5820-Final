@@ -17,6 +17,8 @@ class Stocks {
     const svg = stocks.append("svg");
     svg.append("g").classed("xStockAxis",true);
     svg.append("g").classed("yStockAxis",true);
+    svg.append("g").classed("highPath",true);
+    svg.append("g").classed("lowPath",true);
     svg.attr("height", svgHeight + margin.bottom);
     svg.attr("width", svgWidth);
 
@@ -52,16 +54,31 @@ class Stocks {
       .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
       .y((d) => yScale(d.High));
 
+    const drawLowLine = d3
+      .line()
+      .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
+      .y((d) => yScale(d.Low));
+
     svg
-      .selectAll("path")
+      .selectAll(".highPath")
       .data(data)
       .enter()
       .append("path")
       .attr("d", drawLine(data))
       .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 1)
       // .attr("fill", "black");
+
+    svg
+      .selectAll(".lowPath")
+      .data(data)
+      .enter()
+      .append("path")
+      .attr("d", drawLowLine(data))
+      .attr("transform", `translate(${yaxisWidth},0)`)
+      .attr("stroke", "#cc0418")
+      .attr("stroke-width", 1)
 
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xStockAxis")

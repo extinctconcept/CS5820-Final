@@ -16,7 +16,7 @@ body {
 .options {
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 14pt;
     align-items: start;
     justify-content: center;
 }
