@@ -67,7 +67,7 @@ class Flights {
     let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xFlightAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 35})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 40})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
