@@ -1,6 +1,10 @@
 class InfoPanel {
-    constructor(classSelector) {
-        this.classSelector = classSelector;
+    constructor(map, flights, stocks, debt) {
+        this.map = map;
+        this.flights = flights;
+        this.stocks = stocks;
+        this.debt = debt;
+        
         this.panel = d3.select("#info-panel").classed("info", true);
         this.svgBounds = this.panel.node().getBoundingClientRect();
         this.margin = { top: 30, right: 10, bottom: 10, left: 0 };
