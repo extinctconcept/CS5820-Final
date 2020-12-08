@@ -23,10 +23,10 @@ class Flights {
     let minYear = d3.min(data, (data) => data.Period);
     let maxYear = d3.max(data, (data) => data.Period);
     
-    let minStock = d3.min(data, (data) => data.Total);
-    let maxStock = d3.max(data, (data) => data.Total);
+    let minFlight = d3.min(data, (data) => data.Total);
+    let maxFlight = d3.max(data, (data) => data.Total);
 
-    console.log(minStock, maxStock)
+    console.log(minFlight, maxFlight)
     svg.select("#line")
       .attr("width", svgWidth)
       .attr("height", svgHeight)
@@ -44,13 +44,13 @@ class Flights {
 
     let yScale = d3
       .scaleLinear()
-      .domain([parseFloat(minStock), parseFloat(maxStock)])
-      .range([svgHeight - 40, 0]);
+      .domain([minFlight, maxFlight])
+      .range([svgHeight - 35, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
       .line()
-      .x((d) => xScale(new Date(d.Period).valueOf()) + xScale(dates[1]) / 2)
+      .x((d) => xScale(new Date(d.Period).valueOf()))
       .y((d) => yScale(d.Total));
 
     svg
@@ -59,7 +59,7 @@ class Flights {
       .enter()
       .append("path")
       .attr("d", drawLine(data))
-      .attr("transform", `translate(${yaxisWidth - 25},0)`)
+      .attr("transform", `translate(${yaxisWidth},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
       .attr("fill", "transparent");
@@ -76,7 +76,7 @@ class Flights {
   
       let yAxis = d3.axisLeft(yScale);
       d3.select(".yFlightAxis")
-        .attr("transform", `translate(${yaxisWidth}, 5)`)
+        .attr("transform", `translate(${yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");
   }
