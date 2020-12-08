@@ -219,7 +219,7 @@ class Main {
             vm.arrHelper(vm.flightData, year, d);
         })
         .then((data) => {
-            console.log("flightData: ", vm.flightData);
+            // console.log("flightData: ", vm.flightData);
         })
 
         //National Debt 2000-2017

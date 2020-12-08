@@ -1,11 +1,10 @@
 class Flights {
-  constructor(tooltip, classSelector) {
-    this.classSelector = classSelector;
-    this.tooltip = tooltip;
+  constructor() {
+
   }
 
   render(data) {
-  	console.log(data);
+  	// console.log(data);
   	let flights = d3.select("#flights").classed("flights", true);
   	flights.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -20,8 +19,8 @@ class Flights {
     svg.attr("height", svgHeight + margin.bottom);
     svg.attr("width", svgWidth);
 
-    let minYear = d3.min(data, (data) => data.Period);
-    let maxYear = d3.max(data, (data) => data.Period);
+    // let minYear = d3.min(data, (data) => data.Period);
+    // let maxYear = d3.max(data, (data) => data.Period);
     
     let minFlight = d3.min(data, (data) => data.Total);
     let maxFlight = d3.max(data, (data) => data.Total);
