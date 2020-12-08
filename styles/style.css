@@ -115,6 +115,21 @@ text {
     font-weight: regular;
 }
 
+.text-selected {
+    color: red;
+}
+
+.text-hover {
+    font-weight: bolder;
+    font-size: .9em;
+    border: 1px solid black;
+}
+
+.text-normal {
+    font-weight: normal;
+    font-size: .8em;
+}
+
 .yearChart {
     fill: rgb(0, 110, 255);
 }
@@ -127,16 +142,6 @@ text {
 
 .brush {
     width: 95.5vw;
-}
-
-.text-hover {
-    font-weight: bolder;
-    font-size: .9em;
-}
-
-.text-normal {
-    font-weight: normal;
-    font-size: .8em;
 }
 
 #timeline {

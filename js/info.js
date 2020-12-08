@@ -7,6 +7,7 @@ class InfoPanel {
 
 
         this.eventsList = [];
+        this.selectedEvent = null;
     }
 
     render(data, dataType) {
@@ -30,6 +31,14 @@ class InfoPanel {
             .enter()
             .append("text")
             .classed("text-normal", true)
+            .on("click", function() {
+                // if(!this.selectedEvent) {
+                //     this.selectedEvent = d3.select(this);
+                // }
+                // d3.select(this.selectedEvent).classed("text-selected", false);
+                // this.selectedEvent = d3.select(this);
+                // d3.select(this).classed("text-selected", true);
+            })
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false)
                 d3.select(this).classed("text-hover", true)
