@@ -4,7 +4,7 @@ class InfoPanel {
         this.flights = flights;
         this.stocks = stocks;
         this.debt = debt;
-        
+
         this.panel = d3.select("#info-panel").classed("info", true);
         this.svgBounds = this.panel.node().getBoundingClientRect();
         this.margin = { top: 30, right: 10, bottom: 10, left: 0 };
@@ -14,8 +14,12 @@ class InfoPanel {
         this.selectedEvent = null;
     }
 
+    update(event) {
+        var vm = this;
+        vm.map.render()
+    }
+
     render(data, dataType) {
-        // console.log(data)
         var vm = this;
         vm.eventsList = [];
         vm.panel.selectAll("svg").remove();
@@ -33,7 +37,7 @@ class InfoPanel {
             .enter()
             .append("text")
             .classed("text-normal", true)
-            .on("click", function() {
+            .on("click", function(d) {
 
                 if(!!vm.selectedEvent) {
                     vm.selectedEvent.classed("text-not-selected", true);
@@ -42,7 +46,7 @@ class InfoPanel {
                 vm.selectedEvent = d3.select(this);
                 vm.selectedEvent.classed("text-not-selected", false);
                 vm.selectedEvent.classed("text-selected", true);
-
+                vm.map.selectedEvent(d);
             })
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false);

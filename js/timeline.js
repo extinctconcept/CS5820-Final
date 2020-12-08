@@ -1,6 +1,5 @@
 class Timeline {
-    constructor(classSelector, infoPanel,line) {
-        this.classSelector = classSelector;
+    constructor(infoPanel) {
         this.infoPanel = infoPanel;
         this.padding = 30;
         this.width = window.innerWidth;

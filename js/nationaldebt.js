@@ -1,11 +1,10 @@
 class Debt {
-  constructor(tooltip, classSelector) {
-    this.classSelector = classSelector;
-    this.tooltip = tooltip;
+  constructor() {
+
   }
 
   render(data) {
-    console.log(" Debt: ",data);
+    //console.log(" Debt: ",data);
     let debt = d3.select("#debt").classed("debt", true);
     debt.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -38,7 +37,7 @@ class Debt {
       dates.push(date);
     });
 
-    console.log(dates);
+    // console.log(dates);
 
     let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]).nice();
 

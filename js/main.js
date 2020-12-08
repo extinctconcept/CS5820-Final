@@ -14,14 +14,14 @@
 
 class Main {
     constructor() {
-        this.classSelector = new ClassSelector();
+        // this.classSelector = new ClassSelector();
         // this.tooltip = new Tooltip(this.classSelector);
-        this.map = new Map(this.classSelector);
+        this.map = new Map();
         this.flights = new Flights();
-        this.stocks = new Stocks(this.classSelector);
-        this.debt = new Debt(this.classSelector);
+        this.stocks = new Stocks();
+        this.debt = new Debt();
         this.infoPanel = new InfoPanel(this.map, this.flights, this.stocks, this.debt);
-        this.timeline = new Timeline(this.classSelector, this.info);
+        this.timeline = new Timeline(this.info);
         this.femaData = {};
         this.terrorData = {};
         this.stockData = {};
@@ -141,7 +141,9 @@ class Main {
             var t = this.counties[state].findIndex(x => area.includes(x.county));
             //if we find a viable index we return the coords
             if(t != -1) {
-                return {"0": this.counties[state][t].longitude, "1": this.counties[state][t].latitude};
+                let long = this.counties[state][t].longitude;
+                let lat = this.counties[state][t].latitude;
+                return {"0": !!long ? long : 0, "1": !!lat ? lat : 0};
             }
         }
         //else we return null so we can check for it
@@ -162,6 +164,7 @@ class Main {
             d.date = new Date(d.incidentBeginDate);
             let year = d.date.getFullYear();
             d.coords = vm.getCoords(d.state, d.designatedArea);
+            d.groupingName = d.declarationTitle;
             vm.arrHelper(vm.femaData, year, d);
             
         })
@@ -182,6 +185,7 @@ class Main {
         await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
             d.stateCode = vm.whatIsStateCode(d.provstate);
             d.date = new Date(+d.iyear, +d.imonth, +d.iday);
+            d.groupingName = d.targtype1_txt;
             d.coords = {"0": d.longitude, "1": d.latitude};
             vm.arrHelper(vm.terrorData, +d.iyear, d);
         })
@@ -233,6 +237,11 @@ class Main {
         .then((data) => {
             // console.log("debtData: ", vm.debtData);
         })
+        await vm.init();
+    }
+
+    async init() {
+        await this.map.init();
     }
 
     reRender(year) {
@@ -240,11 +249,11 @@ class Main {
         if(vm.selectedData == "FEMA") {
             vm.infoPanel.render(vm.femaData[year], vm.selectData);
             vm.timeline.render(vm.femaData[year],year);
-            vm.map.render(vm.femaData[year]);
+            vm.map.cleanMap(vm.femaData[year]);
         } else {
             vm.infoPanel.render(vm.terrorData[year], vm.selectData);
             vm.timeline.render(vm.terrorData[year],year);
-            vm.map.render(vm.terrorData[year]);
+            vm.map.cleanMap(vm.terrorData[year]);
         }
         vm.stocks.render(vm.stockData[year]);
         vm.debt.render(vm.debtData[year]); 
@@ -274,7 +283,7 @@ function selectBrush(years) {
 }
 
 function setSelectedData(radio) {
-    console.log(yearVar);
+    // console.log(yearVar);
     main.setSelectedData(radio.value, yearVar);
 }
 

@@ -1,50 +1,25 @@
 class Map {
-  constructor(tooltip, classSelector, topojson) {
-    this.classSelector = classSelector;
-    this.tooltip = tooltip;
+  constructor() {
+    this.map = null;
+    this.data = [];
+    this.parentData = [];
+    this.circle = null;
+    // vm.margin = { top: 30, right: 0, bottom: 30, left: 0 };
   }
 
-  async render(data) {
-    let map = d3.select("#map").classed("map", true);
+  async init() {
+    var vm = this;
+    vm.map = d3.select("#map").classed("map", true).append("svg").attr("viewBox", [-225, -50, 1350, 660]);
+    var us = await d3.json("json/states-albers-10m.json");
+    var path = d3.geoPath();
 
-    // Remove any existing svg elements
-    map.selectAll("svg").remove();
-    
-    // set margin around map
-    let margin = { top: 30, right: 0, bottom: 30, left: 0 };
-
-    //Gets access to the div element created for this chart and legend element from HTML
-    let svgBounds = map.node().getBoundingClientRect();
-    let svgWidth = svgBounds.width - margin.left - margin.right;
-    let svgHeight = svgWidth / 2;
-
-    let legend = d3.select("#legend").classed("map", true);
-
-    let us = await d3.json("json/states-albers-10m.json");
-    let path = d3.geoPath();
-
-    let locations = []
-    let projection = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
-    
-
-    data.forEach(element => {
-      if(element.coords) {
-        // locations.push(projection({"0": parseFloat(element.coords[1]), "1": parseFloat(element.coords[0])}))
-        locations.push(projection(element.coords))
-      }
-    });
-
-    console.log(locations);
-
-    const svg = map.append("svg").attr("viewBox", [-225, -50, 1350, 660]);
-
-    svg
+    vm.map
       .append("path")
       .datum(topojson.merge(us, us.objects.states.geometries))
       .attr("fill", "#ddd")
       .attr("d", path);
 
-    svg
+    vm.map
       .append("path")
       .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
       .attr("fill", "none")
@@ -53,12 +28,40 @@ class Map {
       .attr("stroke-linejoin", "round")
       .attr("d", path);
 
-    locations.forEach(element => {
-        svg
+  }
+
+  cleanMap(data) {
+    d3.select("#map>svg").selectAll("circle").remove();
+    this.parentData = data;
+    this.data = data;
+    this.circle = {r: 5, fill: "blue", id: "all-events"};
+    this.render();
+  }
+  
+  selectedEvent(event) {
+    this.map.selectAll("#selected-events").remove();
+    this.data = [];
+    this.circle = {r: 8, fill: "red", id: "selected-events"};
+    this.parentData.forEach(x => {
+      if(x.groupingName === event && x.coords) {
+        this.data.push(x);
+      }
+    })
+    this.render();
+  }
+  
+  render() {
+    let projection = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+
+    this.data.forEach(x => {
+      if(x.coords) {
+        this.map
           .append("circle")
-          .attr("fill", "blue")
-          .attr("transform", `translate(${element})`)
-          .attr("r", 5);
+          .attr("id", this.circle.id)
+          .style("fill", this.circle.fill)
+          .attr("transform", `translate(${projection(x.coords)})`)
+          .attr("r", this.circle.r);
+      }
     })
   }
 }

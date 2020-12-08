@@ -1,11 +1,9 @@
 class Stocks {
-  constructor(tooltip, classSelector) {
-    this.classSelector = classSelector;
-    this.tooltip = tooltip;
+  constructor() {
   }
 
   render(data) {
-    console.log(data)
+    //console.log(data)
     let stocks = d3.select("#stocks").classed("stocks", true);
     stocks.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -28,7 +26,7 @@ class Stocks {
     let minStock = d3.min(data, (data) => data.Low);
     let maxStock = d3.max(data, (data) => data.High);
 
-    console.log(minStock, maxStock)
+    //console.log(minStock, maxStock)
     svg.select("#line")
       .attr("width", svgWidth)
       .attr("height", svgHeight)

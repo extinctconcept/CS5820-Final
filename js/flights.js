@@ -25,7 +25,7 @@ class Flights {
     let minFlight = d3.min(data, (data) => data.Total);
     let maxFlight = d3.max(data, (data) => data.Total);
 
-    console.log(minFlight, maxFlight)
+    // console.log(minStock, maxStock)
     svg.select("#line")
       .attr("width", svgWidth)
       .attr("height", svgHeight)
@@ -37,7 +37,7 @@ class Flights {
       dates.push(date);
     });
 
-    console.log(dates);
+    // console.log(dates);
 
     let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]).nice();
 
