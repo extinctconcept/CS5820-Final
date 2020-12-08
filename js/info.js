@@ -31,12 +31,13 @@ class InfoPanel {
             .append("text")
             .style("font-size", ".5em")
             .classed("text-normal", true)
-            .on("mouseover", (d) => {
-                // console.log(d3.select(this))
-                // d3.select(this).classed("text-hover", true)
+            .on("mouseover", function() {
+                d3.select(this).classed("text-normal", false)
+                d3.select(this).classed("text-hover", true)
             })
-            .on("mouseout", (d) => {
-                // d3.select(this).classed("text-hover", false)
+            .on("mouseout", function() {
+                d3.select(this).classed("text-hover", false)
+                d3.select(this).classed("text-normal", true)
             })
             .attr("x", "20")
             .attr("y", (d,i) => (i+1)*15)
