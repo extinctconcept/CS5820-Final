@@ -2,6 +2,12 @@
     "AK": [
         {
             "state": "AK",
+            "latitude": "61.2",
+            "longitude": "-149.85",
+            "county": "Anchorage Borough"
+        },
+        {
+            "state": "AK",
             "latitude": "58.47",
             "longitude": "-134.15",
             "county": "City and Borough of Juneau"
