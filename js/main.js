@@ -16,20 +16,18 @@ class Main {
     constructor() {
         this.classSelector = new ClassSelector();
         // this.tooltip = new Tooltip(this.classSelector);
-        // this.info = new Info(this.classSelector);
-        // this.cartogram = new Cartogram(this.tooltip, this.classSelector);
-        this.infoPanel = new InfoPanel(this.classSelector);
+        this.map = new Map(this.classSelector);
+        this.flights = new Flights(this.classSelector);
         this.stocks = new Stocks(this.classSelector);
         this.debt = new Debt(this.classSelector);
-        this.flights = new Flights(this.classSelector);
-        this.map = new Map(this.classSelector);
+        this.infoPanel = new InfoPanel(this.map, this.flights, this.stocks, this.debt);
         this.timeline = new Timeline(this.classSelector, this.info);
         this.femaData = {};
         this.terrorData = {};
         this.stockData = {};
         this.flightData = {};
         this.debtData = {};
-        //adjust this with out dropdown
+
         this.selectedData = "FEMA";
     }
 
@@ -220,7 +218,6 @@ class Main {
             this.arrHelper(this.flightData, year, d);
         })
         .then((data) => {
-            // this.flightData["columns"] = data.columns;
             // console.log("flightData: ", this.flightData);
         })
 
@@ -233,8 +230,6 @@ class Main {
             this.arrHelper(this.debtData, year, d);
         })
         .then((data) => {
-            // this.debtData.reverse();
-            // this.debtData["columns"] = data.columns;
             // console.log("debtData: ", this.debtData);
         })
     }

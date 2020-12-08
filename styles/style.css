@@ -67,7 +67,7 @@ body {
 }
 
 .map path {
-    fill: rgb(48, 48, 48);
+    fill: rgb(48,48,48);
 }
 
 .map circle {
@@ -116,7 +116,11 @@ text {
 }
 
 .text-selected {
-    color: red;
+    fill: red;
+}
+
+.text-not-selected {
+    fill: black;
 }
 
 .text-hover {
@@ -154,16 +158,16 @@ text {
 
 #info-panel {
     background-color:rgb(235, 233, 233);
-    height: 73.1vh;
-    width: 20vw;
+    height: 74.15vh;
+    width: 25vw;
     overflow-y: auto;
     display: flex;
 }
 
 #info {
     background-color:white;
-    height: 76.2vh;
-    width: 20vw;
+    height: 76.15vh;
+    width: 25vw;
     margin: 2px;
 }
 
