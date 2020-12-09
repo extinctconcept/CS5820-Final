@@ -44,7 +44,7 @@ class Stocks {
     let yScale = d3
       .scaleLinear()
       .domain([minStock, maxStock])
-      .range([svgHeight - 35, 0]);
+      .range([svgHeight - 60, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
@@ -104,7 +104,7 @@ class Stocks {
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 35})`)
+        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 60})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
@@ -116,6 +116,23 @@ class Stocks {
         .attr("transform", `translate(${yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");
+
+      d3.select(".xStockAxis")
+        .append("text")      // text label for the x axis
+        .attr("x", svgWidth/2 - 5  )
+        .attr("y",  60 )
+        .style("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Date");
+
+      d3.select(".yStockAxis")
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -35  )
+        .attr("x", -svgHeight/2  )
+        .style("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Stock Index");
 
   }
 }
