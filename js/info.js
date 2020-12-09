@@ -6,7 +6,7 @@ class InfoPanel {
         this.debt = debt;
 
         this.panel = d3.select("#info-panel").classed("info", true);
-        this.svgBounds = window.getElementById("chart-panel").getBoundingClientRect();
+        this.svgBounds = this.panel.node().getBoundingClientRect();
         this.margin = { top: 30, right: 10, bottom: 10, left: 0 };
 
 
