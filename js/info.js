@@ -6,7 +6,7 @@ class InfoPanel {
         this.debt = debt;
 
         this.panel = d3.select("#info-panel").classed("info", true);
-        this.svgBounds = this.panel.node().getBoundingClientRect();
+        this.svgBounds = window.getElementById("chart-panel").getBoundingClientRect();
         this.margin = { top: 30, right: 10, bottom: 10, left: 0 };
 
 
@@ -20,21 +20,21 @@ class InfoPanel {
     }
 
     render(data, dataType) {
-        console.log(data);
         var vm = this;
         vm.eventsList = [];
         vm.panel.selectAll("svg").remove();
         vm.eventsList = data[data.length - 1];
-        //let r = Object.keys(vm.eventsList);
-        var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
 
+        var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
+        const arr = Object.keys(vm.eventsList);
         const svg = vm.panel.append("svg");
-        svg.attr("height",100000);
+
+        svg.attr("height", arr.length*15);
         svg.attr("width", svgWidth);
 
         svg.append("g")
             .selectAll("text")
-            .data(Object.keys(vm.eventsList))
+            .data(arr)
             .enter()
             .append("text")
             .classed("text-normal", true)
