@@ -31,10 +31,9 @@ class InfoPanel {
         svg.attr("height",(vm.eventsList.length*15)+10);
         svg.attr("width", svgWidth);
 
-        console.log(Object.keys(vm.eventsList[0]));
         svg.append("g")
             .selectAll("text")
-            .data(Object.keys(vm.eventsList[0]))
+            .data(vm.eventsList)
             .enter()
             .append("text")
             .classed("text-normal", true)
@@ -60,7 +59,7 @@ class InfoPanel {
 
             .attr("x", "5")
             .attr("y", (d,i) => (i+1)*15)
-            .text(d => d);
+            .text(d => Object.keys(vm.eventsList[0]));
 
     }
 }
