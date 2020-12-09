@@ -39,6 +39,7 @@ class Map {
   }
   
   selectedEvent(event) {
+    console.log(event)
     this.map.selectAll("#selected-events").remove();
     this.data = [];
     this.circle = {r: 8, fill: "red", id: "selected-events"};

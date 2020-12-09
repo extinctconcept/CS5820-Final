@@ -32,7 +32,6 @@ class InfoPanel {
         svg.attr("height",(vm.eventsList.length*15)+1000);
         svg.attr("width", svgWidth);
 
-        console.log(vm.eventsList)
         svg.append("g")
             .selectAll("text")
             .data(Object.keys(vm.eventsList))
@@ -48,7 +47,7 @@ class InfoPanel {
                 vm.selectedEvent = d3.select(this);
                 vm.selectedEvent.classed("text-not-selected", false);
                 vm.selectedEvent.classed("text-selected", true);
-                vm.map.selectedEvent(vm.eventsList[d]);
+                vm.map.selectedEvent(d);
             })
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false);
