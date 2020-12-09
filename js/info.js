@@ -24,16 +24,18 @@ class InfoPanel {
         var vm = this;
         vm.eventsList = [];
         vm.panel.selectAll("svg").remove();
-        vm.eventsList = data.slice(data.length-1, data.length).flat(2);
+        vm.eventsList = data[1348];
+        //let r = Object.keys(vm.eventsList);
         var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
 
         const svg = vm.panel.append("svg");
-        svg.attr("height",(vm.eventsList.length*15)+10);
+        svg.attr("height",(vm.eventsList.length*15)+1000);
         svg.attr("width", svgWidth);
 
+        console.log(vm.eventsList)
         svg.append("g")
             .selectAll("text")
-            .data(vm.eventsList)
+            .data(Object.keys(vm.eventsList))
             .enter()
             .append("text")
             .classed("text-normal", true)
@@ -46,7 +48,7 @@ class InfoPanel {
                 vm.selectedEvent = d3.select(this);
                 vm.selectedEvent.classed("text-not-selected", false);
                 vm.selectedEvent.classed("text-selected", true);
-                vm.map.selectedEvent(d);
+                vm.map.selectedEvent(vm.eventsList[d]);
             })
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false);
@@ -59,7 +61,7 @@ class InfoPanel {
 
             .attr("x", "5")
             .attr("y", (d,i) => (i+1)*15)
-            .text(d => Object.keys(vm.eventsList[0]));
+            .text(d => d);
 
     }
 }

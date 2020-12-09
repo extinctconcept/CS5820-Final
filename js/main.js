@@ -170,7 +170,7 @@ class Main {
         })
         .then((data) => {
             for(let e in vm.femaData) {
-                let events = {};
+                let events = [];
                 vm.femaData[e].forEach(d => {
                     vm.arrHelper(events, d.declarationTitle, d.date)
                     // if(!events.includes(d.declarationTitle)) {
