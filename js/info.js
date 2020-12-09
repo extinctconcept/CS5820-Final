@@ -20,20 +20,21 @@ class InfoPanel {
     }
 
     render(data, dataType) {
+        console.log(data);
         var vm = this;
         vm.eventsList = [];
         vm.panel.selectAll("svg").remove();
-        vm.eventsList = data.slice(data.length-1, data.length).flat();
+        vm.eventsList = data.slice(data.length-1, data.length).flat(2);
         var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
 
         const svg = vm.panel.append("svg");
         svg.attr("height",(vm.eventsList.length*15)+10);
         svg.attr("width", svgWidth);
 
-
+        console.log(Object.keys(vm.eventsList[0]));
         svg.append("g")
             .selectAll("text")
-            .data(vm.eventsList)
+            .data(Object.keys(vm.eventsList[0]))
             .enter()
             .append("text")
             .classed("text-normal", true)

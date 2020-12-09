@@ -170,11 +170,12 @@ class Main {
         })
         .then((data) => {
             for(let e in vm.femaData) {
-                let events = [];
+                let events = {};
                 vm.femaData[e].forEach(d => {
-                    if(!events.includes(d.declarationTitle)) {
-                        events.push(d.declarationTitle);
-                    }  
+                    vm.arrHelper(events, d.declarationTitle, d.date)
+                    // if(!events.includes(d.declarationTitle)) {
+                    //     events.push(d.declarationTitle);
+                    // }  
                 })
                 vm.femaData[e].push(events);
             };
