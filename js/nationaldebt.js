@@ -1,10 +1,21 @@
 class Debt {
   constructor() {
-
+    this.svg = null;
+    this.scale = null;
+  }
+  update(dates) {
+    var vm = this;
+    console.log("debt update: ", dates)
+    // Just testing out the drawing. 
+    // vm.svg.append("circle")
+    // .attr("x", 5000)
+    // .attr("y", 5000)
+    // .attr("r", 10)
+    // .style("fill", "blue");
   }
 
   render(data) {
-    //console.log(" Debt: ",data);
+    var vm = this;
     let debt = d3.select("#debt").classed("debt", true);
     debt.selectAll("svg").remove();
     let margin = { top: 30, right: 90, bottom: 30, left: 0 };
@@ -13,20 +24,17 @@ class Debt {
     let svgWidth = svgBounds.width - margin.left - margin.right - 30;
     let svgHeight = svgBounds.height - margin.bottom - margin.top;
 
-    const svg = debt.append("svg");
-    svg.append("g").classed("xDebtAxis",true);
-    svg.append("g").classed("yDebtAxis",true);
-    svg.attr("height", svgHeight + margin.bottom);
-    svg.attr("width", svgWidth);
-
-    let minYear = d3.min(data, (data) => data.Date);
-    let maxYear = d3.max(data, (data) => data.Date);
+    vm.svg = debt.append("svg");
+    vm.svg.append("g").classed("xDebtAxis",true);
+    vm.svg.append("g").classed("yDebtAxis",true);
+    vm.svg.attr("height", svgHeight + margin.bottom);
+    vm.svg.attr("width", svgWidth);
     
-    let minStock = d3.min(data, (data) => data["Total Public Debt Outstanding"]/1000000);
-    let maxStock = d3.max(data, (data) => data["Total Public Debt Outstanding"]/1000000);
+    let minTotal = d3.min(data, (data) => data["Total Public Debt Outstanding"]/1000000);
+    let maxTotal = d3.max(data, (data) => data["Total Public Debt Outstanding"]/1000000);
 
 
-    svg.select("#line")
+    vm.svg.select("#line")
       .attr("width", svgWidth)
       .attr("height", svgHeight)
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -37,13 +45,11 @@ class Debt {
       dates.push(date);
     });
 
-    // console.log(dates);
-
     let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]).nice();
 
     let yScale = d3
       .scaleLinear()
-      .domain([parseFloat(minStock), parseFloat(maxStock)])
+      .domain([parseFloat(minTotal), parseFloat(maxTotal)])
       .range([svgHeight - 60, 0]);
 
     let yaxisWidth = 80;
@@ -53,7 +59,7 @@ class Debt {
       .y0(svgHeight - 60)
       .y1((d) => yScale(+d["Total Public Debt Outstanding"]/1000000));
 
-    svg
+    vm.svg
       .selectAll("path")
       .data(data)
       .enter()
@@ -63,7 +69,6 @@ class Debt {
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
       .attr("fill", "steelblue");
-      // .attr("fill", "black");
 
       let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xDebtAxis")

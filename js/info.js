@@ -31,7 +31,7 @@ class InfoPanel {
 
         svg.attr("height", arr.length*15);
         svg.attr("width", svgWidth);
-
+        console.log(vm.eventsList)
         svg.append("g")
             .selectAll("text")
             .data(arr)
@@ -48,6 +48,10 @@ class InfoPanel {
                 vm.selectedEvent.classed("text-not-selected", false);
                 vm.selectedEvent.classed("text-selected", true);
                 vm.map.selectedEvent(d);
+                vm.stocks.update(vm.eventsList[d]);
+                vm.debt.update(vm.eventsList[d]);
+                vm.flights.update(vm.eventsList[d]);
+
             })
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false);

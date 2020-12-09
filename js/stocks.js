@@ -2,6 +2,10 @@ class Stocks {
   constructor() {
   }
 
+  update(dates) {
+    console.log("stocks update: ", dates)
+  }
+
   render(data) {
     //console.log(data)
     let stocks = d3.select("#stocks").classed("stocks", true);
