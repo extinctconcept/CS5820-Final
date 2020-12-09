@@ -24,12 +24,12 @@ class InfoPanel {
         var vm = this;
         vm.eventsList = [];
         vm.panel.selectAll("svg").remove();
-        vm.eventsList = data[1348];
+        vm.eventsList = data[data.length - 1];
         //let r = Object.keys(vm.eventsList);
         var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
 
         const svg = vm.panel.append("svg");
-        svg.attr("height",(vm.eventsList.length*15)+1000);
+        svg.attr("height",100000);
         svg.attr("width", svgWidth);
 
         svg.append("g")
