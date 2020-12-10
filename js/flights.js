@@ -91,7 +91,7 @@ class Flights {
     d3.select(".yFlightAxis")
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", -35  )
+        .attr("y", -50  )
         .attr("x", -svgHeight/2  )
         .style("fill", "black")
         .style("text-anchor", "middle")
