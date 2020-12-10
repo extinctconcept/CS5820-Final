@@ -12,27 +12,20 @@ class Stocks {
 
   update(dates) {
     var vm = this;
-    console.log(vm.svgHeight);
     vm.svg.select(".dateLine").remove();
     vm.svg.append("g").classed("dateLine", true);
 
-    // vm.svg.selectAll(".dateLine").remove();
     vm.svg.select(".dateLine")
       .selectAll("line")
       .data(dates)
       .enter()
       .append("line")
       .attr("transform", `translate(${vm.yaxisWidth},0)`)
-      .attr("x1", (d,i) => {
-        console.log(i, d)
-        return vm.xScale(new Date(d))
-      })
+      .attr("x1", d => vm.xScale(new Date(d)))
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
-      .attr("stroke-width", 1)
-      // .attr("id", "dateLine")
-      .style("stroke", "red");
+      .classed("marker", true);
   }
 
   render(data) {
@@ -47,14 +40,10 @@ class Stocks {
     vm.svg.append("g").classed("lowPath",true);
     vm.svg.attr("height", vm.svgHeight + vm.margin.bottom);
     vm.svg.attr("width", vm.svgWidth);
-
-    let minYear = d3.min(data, (data) => data.Date);
-    let maxYear = d3.max(data, (data) => data.Date);
     
     let minStock = d3.min(data, (data) => data.Low);
     let maxStock = d3.max(data, (data) => data.High);
 
-    //console.log(minStock, maxStock)
     vm.svg.select("#line")
       .attr("width", vm.svgWidth)
       .attr("height", vm.svgHeight)
@@ -65,7 +54,6 @@ class Stocks {
       let date = new Date(d.Date);
       dates.push(date);
     });
-
 
     vm.xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, vm.svgWidth]).nice();
 

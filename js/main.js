@@ -242,8 +242,6 @@ class Main {
     }
 
     async init() {
-        console.log("flight: ", this.flightData);
-        console.log("debt: ", this.debtData)
         await this.map.init();
     }
 

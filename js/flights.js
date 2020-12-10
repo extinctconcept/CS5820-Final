@@ -12,7 +12,6 @@ class Flights {
 
   update(dates) {
     var vm = this;
-    console.log(vm.svgHeight);
     vm.svg.select(".dateLine").remove();
     vm.svg.append("g").classed("dateLine", true);
 
@@ -27,8 +26,7 @@ class Flights {
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom)
-      .attr("stroke-width", 1)
-      .style("stroke", "red");
+      .classed("marker", true);
   }
 
   render(data) {
@@ -55,7 +53,6 @@ class Flights {
       let date = new Date(d.Period);
       dates.push(date);
     });
-    console.log(dates)
     vm.xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, vm.svgWidth]).nice();
 
     let yScale = d3
