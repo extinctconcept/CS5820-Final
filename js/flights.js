@@ -24,10 +24,9 @@ class Flights {
       .append("line")
       .attr("transform", `translate(${vm.yaxisWidth},0)`)
       .attr("x1", (d,i) => {
-        console.log(i, d)
-        return vm.xScale(new Date(d))
+        return vm.xScale(new Date(d)) - 35;
       })
-      .attr("x2", d => vm.xScale(new Date(d)))
+      .attr("x2", d => vm.xScale(new Date(d)) - 35)
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom - 5)
       .attr("stroke-width", 1)
