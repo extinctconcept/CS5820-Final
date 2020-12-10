@@ -9,6 +9,7 @@ class Debt {
     this.xScale = null;
     this.yaxisWidth = 80;
   }
+  
   update(dates) {
     var vm = this;
     console.log(vm.svgHeight);
