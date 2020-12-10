@@ -4,13 +4,14 @@ class Flights {
   }
 
   update(dates) {
+    let flights = d3.select("#flights").classed("flights", true);
     console.log("flights update: ", dates)
   }
 
   render(data) {
   	let flights = d3.select("#flights").classed("flights", true);
   	flights.selectAll("svg").remove();
-    let margin = { top: 30, right: 90, bottom: 30, left: 0 };
+    let margin = { top: 30, right: 90, bottom: 50, left: 0 };
     //Gets access to the div element created for this chart and legend element from HTML
     let svgBounds = flights.node().getBoundingClientRect();
     let svgWidth = svgBounds.width - margin.left - margin.right;
@@ -72,11 +73,28 @@ class Flights {
         .attr("x", 9)
         .attr("dy", "-.35em")
         .style("text-anchor", "start");
+
+    d3.select(".xFlightAxis")
+        .append("text")      // text label for the x axis
+        .attr("x", svgWidth/2 - 5  )
+        .attr("y",  60 )
+        .style("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Date");
   
       let yAxis = d3.axisLeft(yScale);
       d3.select(".yFlightAxis")
         .attr("transform", `translate(${yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");
+
+    d3.select(".yFlightAxis")
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -35  )
+        .attr("x", -svgHeight/2  )
+        .style("fill", "black")
+        .style("text-anchor", "middle")
+        .text("Total US Flights");
   }
 }
