@@ -129,6 +129,11 @@ body {
     stroke-width: 2px;
 }
 
+.map {
+    display: flex;
+    flex-direction: column;
+}
+
 .map svg {
     stroke: white;
 }
