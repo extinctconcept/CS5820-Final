@@ -23,14 +23,16 @@
 
 <body>
   <header class="header">
-    DATA CASE: <br/>Impact of Terror Attacks and Natural Disasters
+    DATA CASE: <br />Impact of Terror Attacks and Natural Disasters
     <div class="options">
       <div>
-      <input type="radio" id="terror" name="radio" value="TERROR" onClick="setSelectedData(this)"> Terror Attacks </input>
-    </div>
-    <div>
-      <input type="radio" id="disasters" name="radio" value="FEMA"onClick="setSelectedData(this)" checked="checked"> Natural Disasters </input>
-    </div>
+        <input type="radio" id="terror" name="radio" 
+          value="TERROR" onClick="setSelectedData(this)">Terror&nbsp;Attacks</input>
+      </div>
+      <div>
+        <input type="radio" id="disasters" name="radio" 
+          value="FEMA" onClick="setSelectedData(this)" checked="checked">Natural&nbsp;Disasters</input>
+      </div>
     </div>
   </header>
   <section class="contents">
@@ -38,9 +40,9 @@
       <div class="body">
         <div class="timelineDiv">
           <div>
-          <div class="title">Timeline</div>
-          <svg id="timeline"></svg>
-        </div>
+            <div class="title">Timeline</div>
+            <svg id="timeline"></svg>
+          </div>
         </div>
         <div class="chart-containers">
           <div id="info">
@@ -55,14 +57,16 @@
               <div id="stocks">
                 <span class="title stock-title">
                   <div class="title-container">
-                  Stock Market
-                </div>
-                <div class="key">
-                  <div class="key-high">High</div><div class="color-box-high"></div>
-                  <span class="key-low">Low</span><div class="color-box-low"></div>
-                </div>
-              </span>
-                
+                    Stock Market
+                  </div>
+                  <div class="key">
+                    <div class="key-high">High</div>
+                    <div class="color-box-high"></div>
+                    <span class="key-low">Low</span>
+                    <div class="color-box-low"></div>
+                  </div>
+                </span>
+
               </div>
             </div>
             <div class="chartpanel">
@@ -80,6 +84,8 @@
     </div>
 
   </section>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MoxnDUxc1a8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
   <script type="application/javascript" src="//d3js.org/topojson.v1.min.js"></script>
   <script type="application/javascript" src="js/d3.js"></script>
   <!-- <script type="application/javascript" src="js/tooltip.js"></script> -->

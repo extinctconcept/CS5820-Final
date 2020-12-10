@@ -194,9 +194,10 @@ class Main {
             for(let e in vm.terrorData) {
                 let events = [];
                 vm.terrorData[e].forEach(d => {
-                    if(!events.includes(d.targtype1_txt)) {
-                        events.push(d.targtype1_txt);
-                    }  
+                    vm.arrHelper(events, d.targtype1_txt, d.date);
+                    // if(!events.includes(d.targtype1_txt)) {
+                    //     events.push(d.targtype1_txt);
+                    // }  
                 })
                 vm.terrorData[e].push(events);
             };

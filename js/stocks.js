@@ -3,7 +3,7 @@ class Stocks {
   }
 
   update(dates) {
-    console.log("stocks update: ", dates)
+    // console.log("stocks update: ", dates)
   }
 
   render(data) {
