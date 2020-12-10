@@ -58,7 +58,7 @@ class Flights {
     let yScale = d3
       .scaleLinear()
       .domain([minFlight, maxFlight])
-      .range([vm.svgHeight - vm.margin.bottom, vm.margin.top/4]);
+      .range([vm.svgHeight - vm.margin.bottom, vm.margin.top/10]);
 
     const drawLine = d3
       .line()
