@@ -25,7 +25,12 @@ class Stocks {
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
-      .classed("marker", true);
+      .classed("marker", true)
+      .append("title")
+      .text(d => {
+        let t = new Date(d);
+        return t.toDateString();
+      });
   }
 
   render(data) {

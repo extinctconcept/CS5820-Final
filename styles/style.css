@@ -181,6 +181,8 @@ text {
     font-size: 8pt;
     stroke-width: 0.5px;
     font-weight: regular;
+    cursor: default;
+
 }
 
 .text-selected {
