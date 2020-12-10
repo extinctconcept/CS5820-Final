@@ -1,28 +1,52 @@
 class Stocks {
   constructor() {
+    this.svg = null;
+    this.stocks = d3.select("#stocks").classed("stocks", true);
+    this.margin = { top: 30, right: 90, bottom: 30, left: 0 };
+    this.svgBounds = this.stocks.node().getBoundingClientRect();
+    this.svgWidth = this.svgBounds.width - this.margin.left - this.margin.right - 30;
+    this.svgHeight = this.svgBounds.height - this.margin.bottom - this.margin.top;
+    this.xScale = null;
+    this.yaxisWidth = 80;
   }
 
   update(dates) {
-    // console.log("stocks update: ", dates)
+    var vm = this;
+    console.log(vm.svgHeight);
+    vm.svg.select(".dateLine").remove();
+    vm.svg.append("g").classed("dateLine", true);
+
+    // vm.svg.selectAll(".dateLine").remove();
+    vm.svg.select(".dateLine")
+      .selectAll("line")
+      .data(dates)
+      .enter()
+      .append("line")
+      .attr("transform", `translate(${vm.yaxisWidth},0)`)
+      .attr("x1", (d,i) => {
+        console.log(i, d)
+        return vm.xScale(new Date(d))
+      })
+      .attr("x2", d => vm.xScale(new Date(d)))
+      .attr("y1", 0)
+      .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
+      .attr("stroke-width", 1)
+      // .attr("id", "dateLine")
+      .style("stroke", "red");
   }
 
   render(data) {
-    //console.log(data)
-    let stocks = d3.select("#stocks").classed("stocks", true);
-    stocks.selectAll("svg").remove();
-    let margin = { top: 30, right: 90, bottom: 30, left: 0 };
-    //Gets access to the div element created for this chart and legend element from HTML
-    let svgBounds = stocks.node().getBoundingClientRect();
-    let svgWidth = svgBounds.width - margin.left - margin.right;
-    let svgHeight = svgBounds.height - margin.bottom - margin.top;
+    var vm = this;
 
-    const svg = stocks.append("svg");
-    svg.append("g").classed("xStockAxis",true);
-    svg.append("g").classed("yStockAxis",true);
-    svg.append("g").classed("highPath",true);
-    svg.append("g").classed("lowPath",true);
-    svg.attr("height", svgHeight + margin.bottom);
-    svg.attr("width", svgWidth);
+    vm.stocks.selectAll("svg").remove();
+
+    vm.svg = vm.stocks.append("svg");
+    vm.svg.append("g").classed("xStockAxis",true);
+    vm.svg.append("g").classed("yStockAxis",true);
+    vm.svg.append("g").classed("highPath",true);
+    vm.svg.append("g").classed("lowPath",true);
+    vm.svg.attr("height", vm.svgHeight + vm.margin.bottom);
+    vm.svg.attr("width", vm.svgWidth);
 
     let minYear = d3.min(data, (data) => data.Date);
     let maxYear = d3.max(data, (data) => data.Date);
@@ -31,10 +55,10 @@ class Stocks {
     let maxStock = d3.max(data, (data) => data.High);
 
     //console.log(minStock, maxStock)
-    svg.select("#line")
-      .attr("width", svgWidth)
-      .attr("height", svgHeight)
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    vm.svg.select("#line")
+      .attr("width", vm.svgWidth)
+      .attr("height", vm.svgHeight)
+      .attr("transform", "translate(" + vm.margin.left + "," + vm.margin.top + ")");
 
     let dates = [];
     data.forEach(function (d) {
@@ -43,33 +67,33 @@ class Stocks {
     });
 
 
-    let xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, svgWidth]).nice();
+    vm.xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, vm.svgWidth]).nice();
 
     let yScale = d3
       .scaleLinear()
       .domain([minStock, maxStock])
-      .range([svgHeight - 60, 0]);
+      .range([vm.svgHeight - 60, 0]);
 
     let yaxisWidth = 60;
     const drawLine = d3
       .line()
-      .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
+      .x((d) => vm.xScale(new Date(d.Date).valueOf()) + vm.xScale(dates[1]) / 2)
       .y((d) => yScale(d.High))
       .curve(d3.curveLinear);
 
     const drawLowLine = d3
       .line()
-      .x((d) => xScale(new Date(d.Date).valueOf()) + xScale(dates[1]) / 2)
+      .x((d) => vm.xScale(new Date(d.Date).valueOf()) + vm.xScale(dates[1]) / 2)
       .y((d) => yScale(d.Low))
       .curve(d3.curveLinear);
 
-    svg
+    vm.svg
       .selectAll(".highPath")
       .data(data)
       .enter()
       .append("path")
       .attr("d", drawLine(data))
-      .attr("transform", `translate(${yaxisWidth},0)`)
+      .attr("transform", `translate(${vm.yaxisWidth},0)`)
       .attr("stroke", "#105189")
       .attr("stroke-width", 2)
       .attr("opacity", .08)
@@ -84,13 +108,13 @@ class Stocks {
             .attr("opacity", .08);
            });
 
-    svg
+    vm.svg
       .selectAll(".lowPath")
       .data(data)
       .enter()
       .append("path")
       .attr("d", drawLowLine(data))
-      .attr("transform", `translate(${yaxisWidth},0)`)
+      .attr("transform", `translate(${vm.yaxisWidth},0)`)
       .attr("stroke", "#cc0418")
       .attr("stroke-width", 2)
       .attr("opacity", .008)
@@ -105,10 +129,10 @@ class Stocks {
             .attr("opacity", .008);
            });
 
-      let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m/%Y"));
+      let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xStockAxis")
         .call(xAxis)
-        .attr("transform", `translate(${yaxisWidth}, ${svgHeight - 60})`)
+        .attr("transform", `translate(${vm.yaxisWidth}, ${vm.svgHeight - 60})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
@@ -117,13 +141,13 @@ class Stocks {
   
       let yAxis = d3.axisLeft(yScale);
       d3.select(".yStockAxis")
-        .attr("transform", `translate(${yaxisWidth}, 0)`)
+        .attr("transform", `translate(${vm.yaxisWidth}, 0)`)
         .call(yAxis)
         .selectAll("text");
 
       d3.select(".xStockAxis")
         .append("text")      // text label for the x axis
-        .attr("x", svgWidth/2 - 5  )
+        .attr("x", vm.svgWidth/2 - 5  )
         .attr("y",  60 )
         .style("fill", "black")
         .style("text-anchor", "middle")
@@ -133,7 +157,7 @@ class Stocks {
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", -35  )
-        .attr("x", -svgHeight/2  )
+        .attr("x", -vm.svgHeight/2  )
         .style("fill", "black")
         .style("text-anchor", "middle")
         .text("Stock Index");
