@@ -11,8 +11,9 @@ class Debt {
   }
   update(dates) {
     var vm = this;
-    console.log(dates.length)
+    console.log(vm.svgHeight);
     vm.svg.selectAll("line").remove();
+
     // vm.svg.selectAll("#dateLine").remove();
     vm.svg.selectAll("line").data(dates).enter().append("line")
       .attr("transform", `translate(${vm.yaxisWidth},0)`)
@@ -22,7 +23,7 @@ class Debt {
       })
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
-      .attr("y2", 235)
+      .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
       .attr("stroke-width", .5)
       .attr("id", "dateLine")
       .style("stroke", "red");
