@@ -33,6 +33,29 @@ body {
     justify-content:center;
 }
 
+.media {
+    background-color: #424242 !important;
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+}
+.media > iframe {
+    width:50%;
+}
+
+.media-title {
+    display:flex;
+    color:white;
+    font-size: 24pt;
+    background-color: black;
+    width: 50%;
+    justify-content: center !important;
+    margin: 5px;
+    padding: 5px;
+}
+
 .contents {
     background-color: #424242 !important;
     height: 90vh;
