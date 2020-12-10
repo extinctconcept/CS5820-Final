@@ -29,7 +29,7 @@ class InfoPanel {
         const arr = Object.keys(vm.eventsList).sort();
         const svg = vm.panel.append("svg");
 
-        svg.attr("height", arr.length*15);
+        svg.attr("height", arr.length*15+10);
         svg.attr("width", svgWidth);
         console.log(vm.eventsList)
         svg.append("g")
