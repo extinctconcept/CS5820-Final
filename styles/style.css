@@ -34,7 +34,7 @@ body {
 }
 
 .marker {
-    stroke-dasharray: .1em;
+    stroke-dasharray: .15em;
     stroke-width: 1;
     stroke: black;
 }
