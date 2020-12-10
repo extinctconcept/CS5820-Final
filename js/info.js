@@ -26,7 +26,7 @@ class InfoPanel {
         vm.eventsList = data[data.length - 1];
 
         var svgWidth = vm.svgBounds.width - vm.margin.left - vm.margin.right;
-        const arr = Object.keys(vm.eventsList);
+        const arr = Object.keys(vm.eventsList).sort();
         const svg = vm.panel.append("svg");
 
         svg.attr("height", arr.length*15);

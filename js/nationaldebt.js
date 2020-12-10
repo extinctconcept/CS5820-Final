@@ -11,13 +11,15 @@ class Debt {
   }
   update(dates) {
     var vm = this;
-    vm.svg.selectAll("circle").remove();
-    vm.svg.selectAll("circle").data(dates).enter().append("circle")
+    vm.svg.selectAll("#dateLine").remove();
+    vm.svg.selectAll("line").data(dates).enter().append("line")
     .attr("transform", `translate(${vm.yaxisWidth},0)`)
-    .attr("cx", d => vm.xScale(new Date(d)))
-    .attr("cy", 100)
-    .attr("r", 5)
-    .style("fill", "red");
+    .attr("x1", d => vm.xScale(new Date(d)))
+    .attr("x2", d => vm.xScale(new Date(d)))
+    .attr("y1", 0)
+    .attr("y2", 235)
+    .attr("id", "dateLine")
+    .style("stroke", "red");
   }
 
   render(data) {
