@@ -23,7 +23,7 @@ class Debt {
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
       .attr("y2", 235)
-      .attr("stroke-width", .5)
+      .attr("stroke-width", 1)
       .attr("id", "dateLine")
       .style("stroke", "red");
   }
