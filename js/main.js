@@ -173,9 +173,6 @@ class Main {
                 let events = [];
                 vm.femaData[e].forEach(d => {
                     vm.arrHelper(events, d.declarationTitle, d.date)
-                    // if(!events.includes(d.declarationTitle)) {
-                    //     events.push(d.declarationTitle);
-                    // }  
                 })
                 vm.femaData[e].push(events);
             };
@@ -195,9 +192,6 @@ class Main {
                 let events = [];
                 vm.terrorData[e].forEach(d => {
                     vm.arrHelper(events, d.targtype1_txt, d.date);
-                    // if(!events.includes(d.targtype1_txt)) {
-                    //     events.push(d.targtype1_txt);
-                    // }  
                 })
                 vm.terrorData[e].push(events);
             };
@@ -207,7 +201,6 @@ class Main {
         await d3.csv("data/SPY_Historical_Data.csv", d => {
             d.Date = new Date(d.Date);
             let year = d.Date.getFullYear();
-            // vm.arrHelper(vm.stockData, year, d);
             d.Low = +d.Low;
             d.High = +d.High;
             if(!vm.stockData[year]) {
