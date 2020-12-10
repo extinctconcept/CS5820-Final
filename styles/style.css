@@ -225,15 +225,15 @@ text {
 
 #info-panel {
     background-color:white;
-    height: 72.6vh;
+    height: 73vh;
     width: 25vw;
     overflow-y: auto;
     display: flex;
 }
 
 #info {
-    background-color:white;
-    height: 74.15vh;
+    background-color:black;
+    height: auto;
     width: 25vw;
     margin: 2px;
 }
