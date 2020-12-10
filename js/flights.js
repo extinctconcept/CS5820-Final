@@ -2,12 +2,12 @@ class Flights {
   constructor() {
     this.svg = null;
     this.flights = d3.select("#flights").classed("flights", true);
-    this.margin = { top: 30, right: 90, bottom: 30, left: 0 };
+    this.margin = { top: 45, right: 90, bottom: 35, left: 30 };
     this.svgBounds = this.flights.node().getBoundingClientRect();
-    this.svgWidth = this.svgBounds.width - this.margin.left - this.margin.right - 30;
+    this.svgWidth = this.svgBounds.width - this.margin.left - this.margin.right;
     this.svgHeight = this.svgBounds.height - this.margin.bottom - this.margin.top;
     this.xScale = null;
-    this.yaxisWidth = 80;
+    this.yaxisWidth = 75;
   }
 
   update(dates) {
@@ -23,14 +23,11 @@ class Flights {
       .enter()
       .append("line")
       .attr("transform", `translate(${vm.yaxisWidth},0)`)
-      .attr("x1", (d,i) => {
-        return vm.xScale(new Date(d))
-      })
+      .attr("x1", d => vm.xScale(new Date(d)))
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
-      .attr("y2", vm.svgHeight - vm.margin.bottom - 5)
+      .attr("y2", vm.svgHeight - vm.margin.bottom)
       .attr("stroke-width", 1)
-      // .attr("id", "dateLine")
       .style("stroke", "red");
   }
 
@@ -44,9 +41,6 @@ class Flights {
     vm.svg.append("g").classed("yFlightAxis",true);
     vm.svg.attr("height", vm.svgHeight + vm.margin.bottom);
     vm.svg.attr("width", vm.svgWidth);
-
-    // let minYear = d3.min(data, (data) => data.Period);
-    // let maxYear = d3.max(data, (data) => data.Period);
     
     let minFlight = d3.min(data, (data) => data.Total);
     let maxFlight = d3.max(data, (data) => data.Total);
@@ -61,15 +55,14 @@ class Flights {
       let date = new Date(d.Period);
       dates.push(date);
     });
-
+    console.log(dates)
     vm.xScale = d3.scaleTime().domain([dates[0], dates[dates.length-1]]).range([0, vm.svgWidth]).nice();
 
     let yScale = d3
       .scaleLinear()
       .domain([minFlight, maxFlight])
-      .range([vm.svgHeight - 35, 0]);
+      .range([vm.svgHeight - vm.margin.bottom, vm.margin.top/4]);
 
-    let yaxisWidth = 60;
     const drawLine = d3
       .line()
       .x((d) => vm.xScale(new Date(d.Period).valueOf()))
@@ -89,7 +82,7 @@ class Flights {
     let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%m/%Y"));
       d3.select(".xFlightAxis")
         .call(xAxis)
-        .attr("transform", `translate(${vm.yaxisWidth}, ${vm.svgHeight - 35})`)
+        .attr("transform", `translate(${vm.yaxisWidth}, ${vm.svgHeight - vm.margin.bottom})`)
         .selectAll("text")
         .attr("transform", "rotate(90)")
         .attr("x", 9)
@@ -113,7 +106,7 @@ class Flights {
     d3.select(".yFlightAxis")
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", -50  )
+        .attr("y", -vm.margin.left*2  )
         .attr("x", -vm.svgHeight/2  )
         .style("fill", "black")
         .style("text-anchor", "middle")

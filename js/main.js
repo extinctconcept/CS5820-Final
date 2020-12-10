@@ -218,6 +218,12 @@ class Main {
             vm.arrHelper(vm.flightData, year, d);
         })
         .then((data) => {
+            for(let y in vm.flightData) {
+                y = +y;
+                if(y != 2018) {
+                    vm.flightData[y].push({Period: `1 January ${y+1}`, Total: vm.flightData[y+1][0].Total});
+                }
+            }
             // console.log("flightData: ", vm.flightData);
         })
 
@@ -236,6 +242,8 @@ class Main {
     }
 
     async init() {
+        console.log("flight: ", this.flightData);
+        console.log("debt: ", this.debtData)
         await this.map.init();
     }
 

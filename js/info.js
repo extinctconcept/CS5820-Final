@@ -31,7 +31,7 @@ class InfoPanel {
 
         svg.attr("height", arr.length*15+10);
         svg.attr("width", svgWidth);
-        console.log(vm.eventsList)
+        
         svg.append("g")
             .selectAll("text")
             .data(arr)

@@ -23,10 +23,7 @@ class Debt {
       .enter()
       .append("line")
       .attr("transform", `translate(${vm.yaxisWidth},0)`)
-      .attr("x1", (d,i) => {
-        console.log(i, d)
-        return vm.xScale(new Date(d))
-      })
+      .attr("x1", d => vm.xScale(new Date(d)))
       .attr("x2", d => vm.xScale(new Date(d)))
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
