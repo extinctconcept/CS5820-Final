@@ -2,7 +2,7 @@ class Timeline {
     constructor(infoPanel) {
         this.infoPanel = infoPanel;
         this.padding = 30;
-        this.width = window.innerWidth;
+        this.width = document.getElementById('timeline').clientWidth;;
         this.height = 50;
         this.svg = d3.select("#timeline")
             .attr("width", this.width)
