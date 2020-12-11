@@ -189,7 +189,8 @@ class Main {
         //trimmed from source to have only US data from 2000-2017
         await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
             d.stateCode = vm.whatIsStateCode(d.provstate);
-            d.date = new Date(+d.iyear, +d.imonth, +d.iday);
+            d.month = +d.imonth-1;
+            d.date = new Date(+d.iyear, d.month, +d.iday);
             d.groupingName = d.targtype1_txt;
             d.coords = {"0": d.longitude, "1": d.latitude};
             vm.arrHelper(vm.terrorData, +d.iyear, d);
