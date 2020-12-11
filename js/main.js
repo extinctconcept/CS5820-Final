@@ -111,7 +111,7 @@ class Main {
         }
     }
 
-    //Helper method for building arrays with Object based indeces
+    //Helper method for building arrays with Object based indices
     arrHelper(arr, index, data) {
         if(!arr[index]) {
             arr[index] = [];
@@ -137,6 +137,8 @@ class Main {
     //Load data from csv files.
     async loadData() {
         var vm = this;
+        //County coords file
+        //file was generated from Postal Zip Code data
         await d3.json("data/counties.json").then(data => {
             vm.counties = data;
         })
@@ -149,9 +151,8 @@ class Main {
             d.coords = vm.getCoords(d.state, d.designatedArea);
             d.groupingName = d.declarationTitle;
             vm.arrHelper(vm.femaData, year, d);
-            
-        })
-        .then((data) => {
+        }).then((data) => {
+            //Generate the list for the events panel
             for(let e in vm.femaData) {
                 let events = [];
                 vm.femaData[e].forEach(d => {
@@ -159,7 +160,8 @@ class Main {
                 })
                 vm.femaData[e].push(events);
             };
-        })
+        });
+
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
         await d3.csv("data/globalterrorismdb_0718dist.csv", d => {
@@ -168,8 +170,8 @@ class Main {
             d.groupingName = d.targtype1_txt;
             d.coords = {"0": d.longitude, "1": d.latitude};
             vm.arrHelper(vm.terrorData, +d.iyear, d);
-        })
-        .then((data) => {
+        }).then((data) => {
+            //Generate the list for the events panel
             for(let e in vm.terrorData) {
                 let events = [];
                 vm.terrorData[e].forEach(d => {
@@ -177,7 +179,8 @@ class Main {
                 })
                 vm.terrorData[e].push(events);
             };
-        })
+        });
+
         //Stock data
         await d3.csv("data/SPY_Historical_Data.csv", d => {
             d.Date = new Date(d.Date);
@@ -188,15 +191,14 @@ class Main {
                 vm.stockData[year] = [];
             }
             vm.stockData[year].unshift(d);
-        })
-        .then((data) => { })
+        }).then((data) => { });
+
         //Flight data
         await d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
             let year = d.Period.slice(d.Period.length-4, d.Period.length);
             d.Total = +d.Total;
             vm.arrHelper(vm.flightData, year, d);
-        })
-        .then((data) => {
+        }).then((data) => {
             for(let y in vm.flightData) {
                 y = +y;
                 //This is to make the x-axis generate identically to the other graphs
@@ -213,13 +215,12 @@ class Main {
             d.date = new Date(d["Record Date"]);
             let year = d.date.getFullYear();
             vm.arrHelper(vm.debtData, year, d);
-        })
-        .then((data) => { });
+        }).then((data) => { });
 
         await vm.init();
     }
 
-    //renders the initial map with all events for the year and event type.
+    //renders the initial map
     async init() {
         await this.map.init();
     }
