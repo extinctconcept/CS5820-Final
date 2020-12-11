@@ -87,7 +87,13 @@ class Map {
             vm.infoPanel.clickEvent(x.groupingName);
           })
           .append("title")
-          .text(x.groupingName);
+          .text(() => {
+            //Summary is used by terror data
+            if(!!x.summary) {
+              return x.summary
+            }
+            return x.groupingName
+          });
       }
     })
   }
