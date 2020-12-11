@@ -1,4 +1,7 @@
 class Flights {
+  /**
+   * 
+   */
   constructor() {
     this.svg = null;
     this.flights = d3.select("#flights").classed("flights", true);
@@ -10,12 +13,16 @@ class Flights {
     this.yaxisWidth = 75;
   }
 
+  /**
+   * Renders the dotted line on graphs for a selected event
+   * Represents the date that it occured
+   * @param { Array } dates collection of Strings in date format
+   */
   update(dates) {
     var vm = this;
     vm.svg.select(".dateLine").remove();
     vm.svg.append("g").classed("dateLine", true);
 
-    // vm.svg.selectAll(".dateLine").remove();
     vm.svg.select(".dateLine")
       .selectAll("line")
       .data(dates)
@@ -27,13 +34,14 @@ class Flights {
       .attr("y1", 0)
       .attr("y2", vm.svgHeight - vm.margin.bottom)
       .classed("marker", true)
-        .append("title")
-        .text(d => {
-          let t = new Date(d);
-          return t.toDateString();
-        })
+      .append("title")
+      .text(d => (new Date(d)).toDateString());
   }
 
+  /**
+   * 
+   * @param {*} data 
+   */
   render(data) {
   	var vm = this;
 

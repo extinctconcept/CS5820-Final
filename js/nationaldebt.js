@@ -1,4 +1,7 @@
 class Debt {
+  /**
+   * Constructor for Debt class
+   */
   constructor() {
     this.svg = null;
     this.debt = d3.select("#debt").classed("debt", true);
@@ -10,6 +13,11 @@ class Debt {
     this.yaxisWidth = 80;
   }
   
+  /**
+   * Renders the dotted line on graphs for a selected event
+   * Represents the date that it occured
+   * @param { Array } dates collection of Strings in date format
+   */
   update(dates) {
     var vm = this;
     vm.svg.select(".dateLine").remove();
@@ -27,12 +35,13 @@ class Debt {
       .attr("y2", vm.svgHeight - vm.margin.bottom - 30)
       .classed("marker", true)      
       .append("title")
-      .text(d => {
-        let t = new Date(d);
-        return t.toDateString();
-      });
+      .text(d => (new Date(d)).toDateString());
   }
 
+  /**
+   * 
+   * @param {*} data 
+   */
   render(data) {
     var vm = this;
 

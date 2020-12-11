@@ -1,4 +1,8 @@
 class Timeline {
+    /**
+     * Constructor for Timeline class
+     * @param { InfoPanel } infoPanel instance of class
+     */
     constructor(infoPanel) {
         this.infoPanel = infoPanel;
         this.padding = 30;
@@ -13,6 +17,11 @@ class Timeline {
         this.years = [];
     }
 
+    /**
+     * 
+     * @param {*} data 
+     * @param {*} year 
+     */
     render(data, year) {
         var first = true;
         if (this.years.length === 0) {
@@ -107,6 +116,11 @@ class Timeline {
         }
     }
 
+    /**
+     * 
+     * @param {*} selected 
+     * @param {*} year 
+     */
     selectYear(selected, year) {
         if (this.selected) {
           this.selected.classed('highlighted', false);

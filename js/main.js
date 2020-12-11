@@ -1,4 +1,7 @@
 class Main {
+    /**
+     * Constructor for Main class
+     */
     constructor() {
         this.map = new Map();
         this.flights = new Flights();
@@ -14,9 +17,13 @@ class Main {
         this.selectedData = "FEMA";
     }
 
-
-    //Our terrorist data needs to have this added.
-    // Only included states that were present in data so no Alaska, Maine, Montana, Rhode Island, South Dakota, Vermont, or Wyoming.
+    /**
+     * Finds the State code for a given state
+     * Used by our Terror data exlusively
+     * Only included states that were present in data 
+     * so no Alaska, Maine, Montana, Rhode Island, South Dakota, Vermont, or Wyoming.
+     * @param { String } state 
+     */
     whatIsStateCode(state) {
         switch(state) {
             case "Alabama":
@@ -111,7 +118,14 @@ class Main {
         }
     }
 
-    //Helper method for building arrays with Object based indices
+    /**
+     * Helper method for building arrays with Object based indices
+     * Will create a new array at index if index does not yet exist
+     * Then saves relevant data to that index
+     * @param { Array } arr array to be modified
+     * @param { String } index value used as the array index
+     * @param { Object } data Object to be saved to array
+     */
     arrHelper(arr, index, data) {
         if(!arr[index]) {
             arr[index] = [];
@@ -119,6 +133,12 @@ class Main {
         arr[index].push(data);
     }
 
+    /**
+     * Finds the longitude and latitude for a given county
+     * Used exlusively by our FEMA data
+     * @param { String } state State where declaration occured
+     * @param { String } area area emergency was declared
+     */
     getCoords(state, area) {
         //the FEMA data has some US territories in it and they're not part of the coords I found
         if(!!this.counties[state]) {
@@ -134,11 +154,14 @@ class Main {
         return null;
     }
 
-    //Load data from csv files.
+    /**
+     * Initial loading of data from files
+     * Only run once
+     */
     async loadData() {
         var vm = this;
         //County coords file
-        //file was generated from Postal Zip Code data
+        //file was generated from US Postal Zip Code data
         await d3.json("data/counties.json").then(data => {
             vm.counties = data;
         })
@@ -148,8 +171,8 @@ class Main {
         await d3.csv("data/DisasterDeclarationsSummaries.csv", d => {
             d.date = new Date(d.incidentBeginDate);
             let year = d.date.getFullYear();
-            d.coords = vm.getCoords(d.state, d.designatedArea);
             d.groupingName = d.declarationTitle;
+            d.coords = vm.getCoords(d.state, d.designatedArea);
             vm.arrHelper(vm.femaData, year, d);
         }).then((data) => {
             //Generate the list for the events panel
@@ -220,20 +243,25 @@ class Main {
         await vm.init();
     }
 
-    //renders the initial map
+    /**
+     * Renders the base map
+     */
     async init() {
-        await this.map.init();
+        await this.map.init(this.infoPanel);
     }
 
-    //Handles the rendering on event selection
+    /**
+     * Handles the rendering on event selection
+     * @param {*} year sent from the timeline
+     */
     reRender(year) {
         var vm = this;
         if(vm.selectedData == "FEMA") {
-            vm.infoPanel.render(vm.femaData[year], vm.selectData);
+            vm.infoPanel.render(vm.femaData[year]);
             vm.timeline.render(vm.femaData[year],year);
             vm.map.cleanMap(vm.femaData[year]);
         } else {
-            vm.infoPanel.render(vm.terrorData[year], vm.selectData);
+            vm.infoPanel.render(vm.terrorData[year]);
             vm.timeline.render(vm.terrorData[year],year);
             vm.map.cleanMap(vm.terrorData[year]);
         }
@@ -242,11 +270,19 @@ class Main {
         vm.flights.render(vm.flightData[year]);
     }
     
+    /**
+     * 
+     * @param {*} years 
+     */
     selectBrush(years) {
         this.timeline.selectBrush(years);
     }
 
-    //For change on primary data set
+    /**
+     * For change on primary data set from radio
+     * @param {*} radio 
+     * @param {*} year 
+     */
     setSelectedData(radio, year) {
         this.selectedData = radio;
         this.reRender(year);
@@ -256,19 +292,34 @@ class Main {
 const main = new Main();
 let yearVar = "2000";
 
+/**
+ * 
+ * @param {*} year 
+ */
 function reRender(year) {
     yearVar = year;
     main.reRender(year);
 }
 
+/**
+ * 
+ * @param {*} years 
+ */
 function selectBrush(years) {
     main.selectBrush(years);
 }
 
+/**
+ * 
+ * @param {*} radio 
+ */
 function setSelectedData(radio) {
     main.setSelectedData(radio.value, yearVar);
 }
 
+/**
+ * 
+ */
 async function init() {
     await main.loadData();
     reRender("2000");

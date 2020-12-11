@@ -1,14 +1,23 @@
 class Map {
+  /**
+   * Constructor for Map class
+   */
   constructor() {
     this.map = null;
+    this.infoPanel = null;
     this.data = [];
     this.parentData = [];
     this.circle = null;
-    // vm.margin = { top: 30, right: 0, bottom: 30, left: 0 };
   }
 
-  async init() {
+  /**
+   * Renders our base map
+   * Should only be called once
+   * @param {*} infoPanel InfoPanel instance to be saved to our Map instance.
+   */
+  async init(infoPanel) {
     var vm = this;
+    vm.infoPanel = infoPanel;
     vm.map = d3.select("#map").classed("map", true).append("svg").attr("viewBox", [-225, -50, 1350, 660]);
     var us = await d3.json("json/states-albers-10m.json");
     var path = d3.geoPath();
@@ -27,9 +36,14 @@ class Map {
       .attr("stroke-width", "2px")
       .attr("stroke-linejoin", "round")
       .attr("d", path);
-
   }
 
+  /**
+   * Remove all events from the map when,
+   * new year is selected
+   * or new data set is selected
+   * @param { Array } data Object array of events to be passed to rendering method
+   */
   cleanMap(data) {
     d3.select("#map>svg").selectAll("circle").remove();
     this.parentData = data;
@@ -38,6 +52,10 @@ class Map {
     this.render();
   }
   
+  /**
+   * Renders selected events
+   * @param { String } event 
+   */
   selectedEvent(event) {
     this.map.selectAll("#selected-events").remove();
     this.data = [];
@@ -50,17 +68,24 @@ class Map {
     this.render();
   }
   
+  /**
+   * Renders all the events for the current selection.
+   */
   render() {
+    var vm = this;
     let projection = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
 
-    this.data.forEach(x => {
+    vm.data.forEach(x => {
       if(x.coords) {
-        this.map
+        vm.map
           .append("circle")
-          .attr("id", this.circle.id)
-          .style("fill", this.circle.fill)
+          .attr("id", vm.circle.id)
+          .style("fill", vm.circle.fill)
           .attr("transform", `translate(${projection(x.coords)})`)
-          .attr("r", this.circle.r)
+          .attr("r", vm.circle.r)
+          .on("click", function() {
+            vm.infoPanel.clickEvent(x.groupingName);
+          })
           .append("title")
           .text(x.groupingName);
       }
