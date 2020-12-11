@@ -48,7 +48,7 @@ class Map {
     d3.select("#map>svg").selectAll("circle").remove();
     this.parentData = data;
     this.data = data;
-    this.circle = {r: 5, fill: "blue", id: "all-events"};
+    this.circle = {r: 5, fill: "rgb(0, 100, 255)", id: "all-events"};
     this.render();
   }
   
