@@ -84,7 +84,7 @@ class Debt {
       .attr("stroke-width", 2)
       .attr("fill", "steelblue");
 
-      let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%m/%Y"));
+      let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%b '%y"));
       d3.select(".xDebtAxis")
         .call(xAxis)
         .attr("transform", `translate(${vm.yaxisWidth}, ${vm.svgHeight - 60})`)

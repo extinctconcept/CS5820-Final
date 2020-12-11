@@ -122,7 +122,7 @@ class Stocks {
             .attr("opacity", .008);
            });
 
-      let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%m/%Y"));
+      let xAxis = d3.axisBottom(vm.xScale).tickFormat(d3.timeFormat("%b '%y"));
       d3.select(".xStockAxis")
         .call(xAxis)
         .attr("transform", `translate(${vm.yaxisWidth}, ${vm.svgHeight - 60})`)
