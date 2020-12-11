@@ -84,7 +84,7 @@ class Map {
           .attr("transform", `translate(${projection(x.coords)})`)
           .attr("r", vm.circle.r)
           .on("click", function() {
-            vm.infoPanel.clickEvent(x.groupingName, null);
+            vm.infoPanel.clickEvent(x.groupingName);
           })
           .append("title")
           .text(x.groupingName);

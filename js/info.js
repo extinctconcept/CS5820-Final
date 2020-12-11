@@ -32,22 +32,18 @@ class InfoPanel {
      * Sends data to components for rendering on event selection
      * can be called from here or the map
      * @param { String } d string for groupingName
-     * @param { * } from is it from internal or external call, carries 'this' if exists else 'null'
      */
-    clickEvent(d, from) {  
+    clickEvent(d) {  
         var vm = this;
+
         if(!!vm.selectedEvent) {
             vm.selectedEvent.classed("text-not-selected", true);
             vm.selectedEvent.classed("text-selected", false);
         }
-        if(!from) {
-            vm.selectedEvent = d3.select(from);
-        }
-        else {
-            vm.selectedEvent = d3.select(document.getElementById(`${d}`))
-        }
+        vm.selectedEvent = d3.select(document.getElementById(`${d}`))
         vm.selectedEvent.classed("text-not-selected", false);
         vm.selectedEvent.classed("text-selected", true);
+
         vm.map.selectedEvent(d);
         vm.stocks.update(vm.eventsList[d]);
         vm.debt.update(vm.eventsList[d]);
@@ -77,7 +73,7 @@ class InfoPanel {
             .enter()
             .append("text")
             .classed("text-normal", true)
-            .on("click", d => { vm.clickEvent(d, this) })
+            .on("click", d => vm.clickEvent(d, false))
             .on("mouseover", function() {
                 d3.select(this).classed("text-normal", false);
                 d3.select(this).classed("text-hover", true);
