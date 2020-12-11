@@ -50,7 +50,6 @@ body {
 .media > iframe {
     width:50%;
 }
-
 .media-title {
     display:flex;
     color:white;
@@ -71,7 +70,6 @@ body {
 .charts{
     display: flex;
 }
-
 .chartpanel {
     justify-items:center;
     align-items: center;
@@ -88,17 +86,16 @@ body {
 .title-container {
     flex: 3;
 }
+
 .key {
     font-size: 12pt;
     display:flex;
     justify-items: end;
 }
-
 .key-high {
     margin-right: 3px;
     padding: 1px;
 }
-
 .key-low {
     margin-left: 3px;
     padding: 1px;
@@ -130,15 +127,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .map svg {
-    stroke: white;
+    stroke: black;
 }
-
 .map path {
     fill: rgb(48,48,48);
 }
-
 .map circle {
     fill:rgb(0, 110, 255);
     stroke:white;
@@ -150,18 +144,15 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .stocks > svg  {
     padding: 10px;
     width: auto;
 }
 
 .debt {
-    /* fill: black; */
     display: flex;
     flex-direction: column;
 }
-
 .debt > svg  {
     padding: 10px;
     width: auto;
@@ -171,7 +162,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .flights > svg {
     padding: 10px;
     width: auto;
@@ -182,23 +172,18 @@ text {
     stroke-width: 0.5px;
     font-weight: regular;
     cursor: default;
-
 }
-
 .text-selected {
     fill: red;
 }
-
 .text-not-selected {
     fill: black;
 }
-
 .text-hover {
     font-weight: bolder;
     font-size: .9em;
     border: 1px solid black;
 }
-
 .text-normal {
     font-weight: normal;
     font-size: .8em;
@@ -212,10 +197,6 @@ text {
     fill: rgb(255, 217, 0);
     stroke: rgb(0, 0, 0);
     stroke-width: 2px;
-}
-
-.selected-info {
-    stroke: blue;
 }
 
 .brush {
