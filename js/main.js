@@ -1,21 +1,5 @@
-/*
- Map Lat and long data should be formatted like this
- [  
-    {
-     "0": number,
-     "1": number
-    },
-    {
-     "0": number,
-     "1": number
-    }
-]
-*/
-
 class Main {
     constructor() {
-        // this.classSelector = new ClassSelector();
-        // this.tooltip = new Tooltip(this.classSelector);
         this.map = new Map();
         this.flights = new Flights();
         this.stocks = new Stocks();
@@ -27,7 +11,6 @@ class Main {
         this.stockData = {};
         this.flightData = {};
         this.debtData = {};
-
         this.selectedData = "FEMA";
     }
 
@@ -128,11 +111,12 @@ class Main {
         }
     }
 
-    arrHelper(arr, year, data) {
-        if(!arr[year]) {
-            arr[year] = [];
+    //Helper method for building arrays with Object based indeces
+    arrHelper(arr, index, data) {
+        if(!arr[index]) {
+            arr[index] = [];
         }
-        arr[year].push(data);
+        arr[index].push(data);
     }
 
     getCoords(state, area) {
@@ -151,7 +135,6 @@ class Main {
     }
 
     //Load data from csv files.
-    //Should only be run once.
     async loadData() {
         var vm = this;
         await d3.json("data/counties.json").then(data => {
@@ -176,7 +159,6 @@ class Main {
                 })
                 vm.femaData[e].push(events);
             };
-            // console.log("femaData: ", vm.femaData);
         })
         //Terrorism data
         //trimmed from source to have only US data from 2000-2017
@@ -195,7 +177,6 @@ class Main {
                 })
                 vm.terrorData[e].push(events);
             };
-            // console.log("terrorData: ", vm.terrorData,);
         })
         //Stock data
         await d3.csv("data/SPY_Historical_Data.csv", d => {
@@ -208,9 +189,7 @@ class Main {
             }
             vm.stockData[year].unshift(d);
         })
-        .then((data) => {
-            // console.log("stockData: ", vm.stockData);
-        })
+        .then((data) => { })
         //Flight data
         await d3.csv("data/USCarrier_Traffic_20201106204344.csv", d => {
             let year = d.Period.slice(d.Period.length-4, d.Period.length);
@@ -220,11 +199,11 @@ class Main {
         .then((data) => {
             for(let y in vm.flightData) {
                 y = +y;
+                //This is to make the x-axis generate identically to the other graphs
                 if(y != 2018) {
                     vm.flightData[y].push({Period: `1 January ${y+1}`, Total: vm.flightData[y+1][0].Total});
                 }
             }
-            // console.log("flightData: ", vm.flightData);
         })
 
         //National Debt 2000-2017
@@ -235,16 +214,17 @@ class Main {
             let year = d.date.getFullYear();
             vm.arrHelper(vm.debtData, year, d);
         })
-        .then((data) => {
-            // console.log("debtData: ", vm.debtData);
-        })
+        .then((data) => { });
+
         await vm.init();
     }
 
+    //renders the initial map with all events for the year and event type.
     async init() {
         await this.map.init();
     }
 
+    //Handles the rendering on event selection
     reRender(year) {
         var vm = this;
         if(vm.selectedData == "FEMA") {
@@ -265,6 +245,7 @@ class Main {
         this.timeline.selectBrush(years);
     }
 
+    //For change on primary data set
     setSelectedData(radio, year) {
         this.selectedData = radio;
         this.reRender(year);
@@ -284,7 +265,6 @@ function selectBrush(years) {
 }
 
 function setSelectedData(radio) {
-    // console.log(yearVar);
     main.setSelectedData(radio.value, yearVar);
 }
 
