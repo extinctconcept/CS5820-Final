@@ -40,7 +40,7 @@ class InfoPanel {
             vm.selectedEvent.classed("text-not-selected", true);
             vm.selectedEvent.classed("text-selected", false);
         }
-        if(!!from) {
+        if(!from) {
             vm.selectedEvent = d3.select(from);
         }
         else {
