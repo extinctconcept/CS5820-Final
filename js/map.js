@@ -60,7 +60,9 @@ class Map {
           .attr("id", this.circle.id)
           .style("fill", this.circle.fill)
           .attr("transform", `translate(${projection(x.coords)})`)
-          .attr("r", this.circle.r);
+          .attr("r", this.circle.r)
+          .append("title")
+          .text(x.groupingName);
       }
     })
   }
